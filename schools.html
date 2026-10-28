@@ -231,6 +231,28 @@
   .flags li{padding:12px 0 12px 22px;border-top:1px solid var(--line);font-size:15px;color:#DADAD7;position:relative}
   .flags li:last-child{border-bottom:1px solid var(--line)}
   .flags li::before{content:"";position:absolute;left:0;top:19px;width:10px;height:2px;background:var(--signal)}
+
+  /* ---------- start page ---------- */
+  .class-btn{font-size:11px;padding:12px 16px}
+  .near-controls{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:30px}
+  .near-controls select{width:auto;min-width:160px}
+  .near-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:2px;margin-top:20px}
+  .near-col{background:var(--ink);padding:20px 18px}
+  .near-col ul{list-style:none;margin:12px 0 0;padding:0}
+  .near-col li{display:flex;flex-direction:column;gap:2px;padding:9px 0;border-top:1px solid var(--line);font-size:14px}
+  .near-col li.none{color:var(--mute)}
+  .near-col .mi{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--mute)}
+  #near-status{display:block}
+  .tpl-form{margin-top:30px;background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:clamp(18px,3vw,28px)}
+  .tpl-form .fields{grid-template-columns:repeat(4,1fr)}
+  .tpl-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+  .tpl{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:20px 22px;display:flex;flex-direction:column;gap:12px}
+  .tpl-wide{grid-column:1 / -1;box-shadow:inset 0 0 0 1px var(--signal)}
+  .tpl-head{display:flex;justify-content:space-between;align-items:center;gap:12px}
+  .tpl-body{margin:0;font-family:var(--body);font-size:15px;line-height:1.55;color:#DADAD7;white-space:pre-wrap;word-break:break-word}
+  .copy-btn{padding:9px 14px;font-size:10.5px}
+  @media (max-width:1040px){.near-grid{grid-template-columns:1fr 1fr}.tpl-form .fields{grid-template-columns:1fr 1fr}}
+  @media (max-width:560px){.near-grid{grid-template-columns:1fr}.tpl-grid{grid-template-columns:1fr}.tpl-form .fields{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -468,6 +490,7 @@
       <a href="/programs">For college staffs</a>
       <a href="/schools">For high schools</a>
       <a href="/parents">For parents</a>
+      <a href="/start">Start here</a>
       <a href="https://inhomecollegeprospects.com">Coach portal</a>
       <a href="https://inhomecollegescouts.com">Scout portal</a>
       <a href="mailto:info@inhomerecruiting.com">info@inhomerecruiting.com</a>
