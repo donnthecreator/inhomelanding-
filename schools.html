@@ -253,6 +253,13 @@
   .copy-btn{padding:9px 14px;font-size:10.5px}
   @media (max-width:1040px){.near-grid{grid-template-columns:1fr 1fr}.tpl-form .fields{grid-template-columns:1fr 1fr}}
   @media (max-width:560px){.near-grid{grid-template-columns:1fr}.tpl-grid{grid-template-columns:1fr}.tpl-form .fields{grid-template-columns:1fr}}
+
+  .watch-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:36px;max-width:820px}
+  .watch{margin:0;display:flex;flex-direction:column;gap:12px}
+  .watch video{width:100%;aspect-ratio:9/16;background:#000;border:1px solid var(--line);border-radius:3px;display:block}
+  .watch figcaption{display:flex;flex-direction:column;gap:4px;font-size:14px;color:#B9B9B6}
+  .watch figcaption strong{color:var(--bone);font-size:16px}
+  @media (max-width:560px){.watch-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -347,6 +354,25 @@
     </div>
   </section>
 
+
+
+  <section id="watch">
+    <div class="wrap">
+      <p class="eyebrow">From the Playbook</p>
+      <h2>Sixty seconds at a time</h2>
+      <p class="section-lede">Short lessons families actually finish. Two to start. The full set lives inside the Playbook.</p>
+      <div class="watch-grid">
+        <figure class="watch">
+          <video controls playsinline preload="none" poster="/media/visit-etiquette.jpg" src="/media/visit-etiquette.mp4" aria-label="Visit etiquette"></video>
+          <figcaption><span class="eyebrow quiet">Module 7</span><strong>The visit is an interview</strong><span>How a family carries itself in the building.</span></figcaption>
+        </figure>
+        <figure class="watch">
+          <video controls playsinline preload="none" poster="/media/right-camp.jpg" src="/media/right-camp.mp4" aria-label="The right camp"></video>
+          <figcaption><span class="eyebrow quiet">Module 8</span><strong>The right camp, not the most camps</strong><span>One developmental camp costs a month of training. Spend it where evaluators are.</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
 
   <section id="agents">
     <div class="wrap">
@@ -510,7 +536,7 @@
       action: 'Build his 12-month plan' },
     { label: 'Is this camp worth $450?',
       q: 'A camp is asking $450. Is it worth it?',
-      a: 'Maybe. Here is how I would read it before you pay.\n\nLook at the registration page for one thing: is the position coach from a school he could actually play at going to be on the field running his group? If yes, that is an evaluation, and an evaluation can be worth $450. If it says coaches are "expected to attend" and a company is running it, that is a revenue event dressed as exposure.\n\nSend me the camp name and I will score it against the checklist from Module 8.',
+      a: 'Maybe. Here is how I would read it before you pay.\n\nOne question: who is evaluating? If the position coach from a school he could actually play at is on the field running his group, or it is one of the invite showcases where the people who make rankings are standing on the sideline, that is an evaluation and it can be worth $450. If it is a developmental camp, coaches teaching and nobody deciding, that $450 is a full month of real training he keeps forever.\n\nAnd before any camp: skill guys run track, linemen wrestle. Those two sports move a profile more than any camp does. Send me the camp name and I will score it against Module 8.',
       action: 'Open the camp checklist' },
     { label: 'What is a core course?',
       q: 'His counselor said something about core courses. What counts?',
