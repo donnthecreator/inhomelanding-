@@ -225,6 +225,12 @@
     .facts{grid-template-columns:1fr}
     .msg{max-width:100%}
   }
+
+  .flags{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:clamp(22px,3.4vw,34px)}
+  .flags ul{list-style:none;margin:16px 0 0;padding:0}
+  .flags li{padding:12px 0 12px 22px;border-top:1px solid var(--line);font-size:15px;color:#DADAD7;position:relative}
+  .flags li:last-child{border-bottom:1px solid var(--line)}
+  .flags li::before{content:"";position:absolute;left:0;top:19px;width:10px;height:2px;background:var(--signal)}
 </style>
 </head>
 <body>
@@ -247,7 +253,8 @@
     <p class="lede" style="font-size:16px;color:var(--mute);margin-top:14px">Free with the InHome High School license. Built from the same film-first evaluation college staffs get from us.</p>
     <div class="cta-row">
       <a class="btn" href="#inquire">Bring it to my school</a>
-      <a class="btn ghost" href="#assistant">Try the parent assistant</a>
+      <a class="btn ghost" href="/parents">Set up my athlete</a>
+      <a class="btn ghost" href="#assistant">Talk to Coach AI</a>
     </div>
   </div>
 
@@ -264,10 +271,10 @@
           <p class="fine" style="margin-top:14px">About five hours. Updated every August when the rules change.</p>
         </div>
         <div class="card card-hot">
-          <p class="eyebrow">02 / The assistant</p>
-          <h3>A scout in their pocket</h3>
-          <p>An AI assistant trained on the course and the current rules. Parents ask it the basic questions at 11pm instead of texting the coach: when can a college call, what counts as a core course, is this camp worth the money.</p>
-          <p class="fine" style="margin-top:14px">Pulls the right lesson, the right date, the right form. Never speaks for a program.</p>
+          <p class="eyebrow">02 / Coach AI</p>
+          <h3>A coach in their pocket</h3>
+          <p>Coach AI knows the course, the current rules, and your son. Parents ask it the basic questions at 11pm instead of texting the head coach: when can a college call, what counts as a core course, is this camp worth the money, does he need an agent.</p>
+          <p class="fine" style="margin-top:14px">Talks like a coach, not a help desk. Does the small jobs for you. Never speaks for a program.</p>
         </div>
         <div class="card">
           <p class="eyebrow quiet">03 / The read</p>
@@ -283,23 +290,23 @@
     <div class="wrap">
       <div class="split">
         <div>
-          <p class="eyebrow">The parent assistant</p>
-          <h2>Ask it what you'd ask a scout, if you knew one</h2>
-          <p class="section-lede">It answers from the course, the current NCAA calendar and the eligibility rules, and it does the small jobs for you: builds the twelve-month plan for your son's class, drafts the first email he sends, lists the core courses to check with the counselor.</p>
+          <p class="eyebrow">Coach AI</p>
+          <h2>Ask it what you'd ask a coach, if you had one who picked up</h2>
+          <p class="section-lede">Coach AI answers from the course, the current NCAA calendar and the eligibility rules, in plain language, and it does the small jobs for you: builds the twelve-month plan for your son's class, drafts the first email he sends, lists the core courses to check with the counselor, reads a camp page or an agent's pitch before you spend a dollar.</p>
           <ul class="checklist">
             <li><span class="n">01</span><span>Knows which rules apply to your son's graduating class.</span></li>
             <li><span class="n">02</span><span>Sends anything eligibility-specific to the Eligibility Center and your counselor.</span></li>
-            <li><span class="n">03</span><span>Will not tell you a program is interested. Only a program can do that.</span></li>
+            <li><span class="n">03</span><span>Will not tell you a program is interested, and will not contact one for you. Only a program can say it, and only your son should ask.</span></li>
           </ul>
-          <p class="fine" style="margin-top:20px">Try a question. The full assistant opens to families through their school's code.</p>
+          <p class="fine" style="margin-top:20px">Try a question. The full Coach AI opens to families through their school's code, and it starts with <a href="/parents">his profile</a>.</p>
         </div>
 
         <div class="chat" id="chat">
           <div class="chat-head">
             <span class="chat-dot" aria-hidden="true">i</span>
             <div>
-              <div class="chat-title">Parent assistant</div>
-              <div class="chat-sub">Class of 2028 profile</div>
+              <div class="chat-title">Coach AI</div>
+              <div class="chat-sub">Preview · class of 2028 profile</div>
             </div>
           </div>
           <div class="chat-log" id="chat-log" aria-live="polite">
@@ -310,9 +317,40 @@
           <div class="chips" id="chips"></div>
           <form class="chat-ask" id="chat-form">
             <label for="ask" class="sr-only">Ask a question</label>
-            <input id="ask" type="text" placeholder="Ask anything about recruiting" autocomplete="off">
+            <input id="ask" type="text" placeholder="Ask Coach anything about recruiting" autocomplete="off">
             <button class="btn" type="submit">Ask</button>
           </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="agents">
+    <div class="wrap">
+      <div class="split">
+        <div>
+          <p class="eyebrow">Agents</p>
+          <h2>What an agent is, and when your son needs one</h2>
+          <p class="section-lede">Since NIL opened up, parents of good high school players hear from "agents," "marketing reps" and "advisors" early. Most of it is noise. Here is the short version, and Coach AI will read any specific pitch you forward it.</p>
+          <ul class="checklist">
+            <li><span class="n">01</span><span>An agent earns a percentage of money your son makes. A junior with no NIL deals has nothing for an agent to earn from. Anyone pushing representation on him now is selling something else.</span></li>
+            <li><span class="n">02</span><span>Agents are regulated by state law. In most states an athlete agent has to be registered, and your state's high school association sets whether and how a high school athlete can do NIL at all. Check both before anyone signs anything.</span></li>
+            <li><span class="n">03</span><span>A legitimate agent negotiates deals that already exist and gets paid out of them. A legitimate agent does not charge up front, does not promise offers, and does not contact college coaches for him.</span></li>
+            <li><span class="n">04</span><span>If a real deal shows up, usually senior year or after he signs, that is when a conversation about representation makes sense. Division I recruits also have to report deals of $600 or more, so keep the paperwork.</span></li>
+          </ul>
+        </div>
+        <div class="flags">
+          <p class="eyebrow quiet">Walk away if you hear</p>
+          <ul>
+            <li>"Pay a fee to get started" or "a one-time setup cost"</li>
+            <li>"We have relationships with the coaches at..."</li>
+            <li>"We can get him offers"</li>
+            <li>"Sign now, exclusive, three years"</li>
+            <li>"Don't mention this to his coach"</li>
+            <li>Any contract before there is a deal to put in it</li>
+          </ul>
+          <p class="fine" style="margin-top:18px">InHome is not an agent and does not represent athletes. We scout film and teach families how the process works. Nothing on this page is legal advice.</p>
         </div>
       </div>
     </div>
@@ -324,7 +362,7 @@
         <div>
           <p class="eyebrow">For the coach and the AD</p>
           <h2>Hand it to every family on day one</h2>
-          <p class="section-lede">The InHome High School license runs your recruiting operation: every athlete gets a profile, film links surface recruitable players to our scout network, and your families get the playbook and the assistant at no charge. You stop being the only person a parent can ask.</p>
+          <p class="section-lede">The InHome High School license runs your recruiting operation: every athlete gets a profile, film links surface recruitable players to our scout network, and your families get the playbook and Coach AI at no charge. You stop being the only person a parent can ask.</p>
         </div>
         <dl class="facts">
           <div><dt>Cost to families</dt><dd>Free</dd></div>
@@ -336,7 +374,7 @@
 
       <div class="straight">
         <p class="eyebrow">Before you ask</p>
-        <p>Some families will finish the course and want training. Trainers in The Lab USA network are available to them if they ask. Your school sees nothing from that and owes nothing for it, and the course and assistant never pitch it. Submitting film, taking the course, or using the assistant is not a guarantee of a grade, an offer, or contact from any program.</p>
+        <p>Some families will finish the course and want training. Trainers in The Lab USA network are available to them if they ask. Your school sees nothing from that and owes nothing for it, and the course and Coach AI never pitch it. Submitting film, taking the course, or using Coach AI is not a guarantee of a grade, an offer, or contact from any program.</p>
       </div>
     </div>
   </section>
@@ -429,6 +467,7 @@
       <a href="#intake">Get scouted</a>
       <a href="/programs">For college staffs</a>
       <a href="/schools">For high schools</a>
+      <a href="/parents">For parents</a>
       <a href="https://inhomecollegeprospects.com">Coach portal</a>
       <a href="https://inhomecollegescouts.com">Scout portal</a>
       <a href="mailto:info@inhomerecruiting.com">info@inhomerecruiting.com</a>
@@ -440,24 +479,28 @@
 <script>
   document.getElementById('yr').textContent = new Date().getFullYear();
 
-  /* ---------- parent assistant demo (canned answers) ---------- */
+  /* ---------- Coach AI preview (canned answers) ---------- */
   var QA = [
     { label: 'When can a college coach call my son?',
       q: 'When can a college coach actually call my son? He is a sophomore.',
-      a: 'For Division I football, coaches can start calling, texting and emailing him on June 15 after his sophomore year. In-person contact away from campus opens January 1 of his junior year.\n\nUntil June 15 the quiet is by rule, not a sign nobody is interested. He can message coaches himself at any time, and they can respond.',
+      a: 'Good question, and I get it a lot from sophomore parents who think the phone should be ringing.\n\nFor Division I football, coaches can start calling and texting him June 15 after his sophomore year. Face to face off campus opens January 1 of his junior year. So right now the quiet is the rule, not a verdict on him.\n\nWhat he can do today: message coaches himself. They are allowed to write back. Want me to lay out his next twelve months so you know what should be happening when?',
       action: 'Build his 12-month plan' },
     { label: 'Is this camp worth $450?',
       q: 'A camp is asking $450. Is it worth it?',
-      a: 'Ask one question on the registration page: will the position coach from a program he could actually play at be on the field, running his group? If yes, that is an evaluation and it can be worth the money. If it is a showcase run by a company, with coaches "expected to attend," it is a revenue event.\n\nModule 8 has the full checklist. Want me to score this one against it?',
+      a: 'Maybe. Here is how I would read it before you pay.\n\nLook at the registration page for one thing: is the position coach from a school he could actually play at going to be on the field running his group? If yes, that is an evaluation, and an evaluation can be worth $450. If it says coaches are "expected to attend" and a company is running it, that is a revenue event dressed as exposure.\n\nSend me the camp name and I will score it against the checklist from Module 8.',
       action: 'Open the camp checklist' },
     { label: 'What is a core course?',
       q: 'His counselor said something about core courses. What counts?',
-      a: 'The NCAA requires 16 approved core courses for Division I: 4 English, 3 math at Algebra I or higher, 2 science, 1 extra of those, 2 social science, and 4 more from any of those or a foreign language. 10 of the 16 have to be done before senior year.\n\nThe list of approved courses is specific to his school. I can draft the questions to bring to the counselor, but the Eligibility Center makes the final call.',
+      a: 'Glad the counselor brought it up. This is the thing that quietly ends more recruitments than talent does.\n\nDivision I wants 16 approved core courses: 4 English, 3 math at Algebra I or higher, 2 science, 1 more of those, 2 social science, and 4 more from any of those or a foreign language. 10 of the 16 have to be done before senior year starts.\n\nWhich courses count is specific to his school, so I can draft the questions to bring to the counselor, but the Eligibility Center makes the final call, not me.',
       action: 'Draft the counselor questions' },
     { label: 'Should I email the coaches for him?',
       q: 'Should I email the coaches for him?',
-      a: 'No. A message from a parent tells a staff something they do not want to know. He sends it, under his own name, short, with the film link above the fold.\n\nYour job is the conditions: the tape is right, the grades are right, the profile is public and the phone gets answered. I can draft his first email for him to edit.',
-      action: 'Draft his first email' }
+      a: 'I am going to be straight with you: no.\n\nA message from a parent tells a staff something they did not want to know. He sends it, under his own name, short, with the film link right at the top.\n\nYour job is the conditions. The tape is right, the grades are right, the profile is public, and the phone gets answered. I can draft his first email so he has something to edit instead of a blank screen.',
+      action: 'Draft his first email' },
+    { label: 'Does he need an agent?',
+      q: 'Somebody told me he needs an agent. Does he?',
+      a: 'Almost certainly not yet. An agent earns a percentage of money your son makes. A high school junior with no NIL deals has nothing for an agent to take a piece of, so anybody pushing one on him right now is selling something.\n\nWhere a real one helps: when there is an actual deal on the table, usually senior year or after he signs. Even then, nobody can promise offers, and nobody should be contacting coaches for him.\n\nThe red flags are below on this page. Want me to walk through them against someone who has reached out?',
+      action: 'Check someone who contacted us' }
   ];
 
   var chips = document.getElementById('chips');
@@ -488,7 +531,7 @@
   show(0);
 
   actEl.addEventListener('click', function(){
-    aEl.textContent = 'That one needs your son\'s profile. Families get the full assistant through their school\'s InHome code. Ask your coach or AD, or send us the school below.';
+    aEl.textContent = 'For that one I need to know who he is. Once your school is on InHome and you set up his profile, I will have his class, his position and his film, and I can actually do the work instead of talking about it.\n\nYou can set up his profile now at /parents. If your school is not on yet, ask the coach or AD, or send us the school below.';
     actEl.style.display = 'none';
   });
 
@@ -497,7 +540,7 @@
     var text = askInput.value.trim();
     if(!text) return;
     qEl.textContent = text;
-    aEl.textContent = 'The full assistant answers that for families on an InHome school code. On this page it is a preview, so try one of the questions below, or ask your coach or AD about bringing InHome to the school.';
+    aEl.textContent = 'On this page I am a preview, so I can only take the questions below. Once your family is on a school code I answer anything about his recruiting, and I remember who he is.\n\nIf you want a head start, set up his profile at /parents.';
     actEl.style.display = 'none';
     Array.prototype.forEach.call(chips.children, function(c){ c.className = 'chip'; });
     askInput.value = '';
