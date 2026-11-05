@@ -11,16 +11,25 @@
   var CODES = ['PARENTS26', 'KNIGHTS26', 'INHOME-DEMO'];
   function unlocked() { return CODES.indexOf((state.code || '').toUpperCase()) >= 0; }
   var REC = { '2027': 9, '2028': 3, '2029': 1, '2030': 1, '2031': 1 };
-  var POSNAME = { qb: 'quarterback', skill: 'skill position', db: 'defensive back', lb: 'linebacker', ol: 'offensive lineman', dl: 'defensive lineman', k: 'specialist', ath: 'athlete' };
+  var POSNAME = { qb: 'quarterback', rb: 'running back', wr: 'wide receiver', te: 'tight end', ot: 'offensive tackle', og: 'guard', c: 'center', de: 'defensive end', edge: 'edge rusher', dt: 'defensive tackle', lb: 'linebacker', cb: 'cornerback', s: 'safety', k: 'kicker', p: 'punter', ls: 'long snapper', ath: 'athlete' };
   var POSTIP = {
-    qb: 'Quarterback is the hardest room in recruiting, so Module 2 has a lesson just on it, and full game film matters more for him than for anyone else.',
-    skill: 'For a skill position, a season of track will move his profile more than any camp you can buy. Module 8 covers why.',
-    db: 'The first thing a staff screens a defensive back for is whether he can flip his hips and run. Module 2 has the rest.',
+    qb: 'Quarterback is the hardest room in recruiting, and full game film matters more for him than for anyone else. Module 2 has a lesson just on it.',
+    rb: 'For a back they want contact balance and vision before they care about his 40. Module 2 covers what gets screened first, and a season of track still moves his game speed.',
+    wr: 'For a receiver the question is whether he separates at the top of the route, not whether he catches the deep ball. A season of track does more for him than any camp.',
+    te: 'Tight ends get graded twice, once as a blocker and once as a receiver, and the blocking tape is the one families forget to include.',
+    ot: 'For a tackle it is feet and whether he bends at the knee instead of the waist. Wrestling in the offseason builds exactly that.',
+    og: 'Guard play is leverage and hands in a phone booth. Wrestling does more for that than any lineman camp you can pay for.',
+    c: 'A center is graded on the snap and the line calls before anything else, so get him on film making the calls. Wrestling builds the bend and the hands.',
+    de: 'For a defensive end it is get-off and hands, and wrestling in the offseason builds both.',
+    edge: 'For an edge rusher it is get-off, bend and hands. Wrestling builds all three, and the tape should show a counter move, not just one speed rush.',
+    dt: 'Inside it is get-off, leverage and hands. Wrestling is the offseason sport that moves those, and Module 2 covers what gets screened first.',
     lb: 'For a linebacker they want to see him trigger downhill instead of waiting to see it. Module 2 covers what gets screened first.',
-    ol: 'For a lineman, wrestling in the offseason does what no camp does: bend, leverage and hands. Module 8 covers it.',
-    dl: 'For a defensive lineman it is get-off and hands, and wrestling in the offseason builds both. Modules 2 and 8.',
-    k: 'Specialists are recruited on verified numbers and clean film more than anything else. Module 3 and Module 8 matter most.',
-    ath: 'Until he settles on a position, Module 2 is the one to work: it is how a staff decides where he actually fits.'
+    cb: 'The first thing a staff checks on a corner is whether he can flip his hips and run. Tackling and ball skills come second.',
+    s: 'Safeties are graded on range and angles, and on whether they can tackle in space. Get both on the tape.',
+    k: 'Specialists are recruited on verified numbers and clean film more than anything else. Get to the camps where they actually measure.',
+    p: 'Punters live on verified numbers: hang time, net, consistency on film. Camps that measure are worth more than camps that teach.',
+    ls: 'Long snappers are recruited on verified snap times and clean, repeatable film. The camps that time him are the ones worth the money.',
+    ath: 'Until he settles on a position, Module 2 is the one to work: it is how a staff decides where he actually fits.',
   };
   function load() {
     try { var s = JSON.parse(localStorage.getItem(KEY) || '{}'); if (s && typeof s === 'object') state = Object.assign(state, s); } catch (e) {}
@@ -270,7 +279,10 @@
         render(); document.getElementById('course-sec').scrollIntoView({ behavior: 'smooth' });
         openPanel(true);
         var r = REC[state.cls] || 1;
-        say('Class of ' + state.cls + (state.pos ? ', ' + POSNAME[state.pos] : '') + '. Got it.\n\nEverybody starts at Module 1, it is the one that resets what you think recruiting is. After that, Module ' + r + ' is the one that matters most for his year.' + (state.pos && POSTIP[state.pos] ? '\n\n' + POSTIP[state.pos] : ''), 'coach');
+        var plan = r === 1
+          ? 'Start at Module 1. For his year it is also the one that matters most, so take your time with it.'
+          : 'Everybody starts at Module 1, it is the one that resets what you think recruiting is. After that, Module ' + r + ' is the one that matters most for his year.';
+        say('Class of ' + state.cls + (state.pos ? ', ' + POSNAME[state.pos] : '') + '. Got it.\n\n' + plan + (state.pos && POSTIP[state.pos] ? '\n\n' + POSTIP[state.pos] : ''), 'coach');
       });
       if (state.cls && introSec) introSec.style.display = 'none';
     }
