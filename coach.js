@@ -9,7 +9,17 @@
   var TOTAL = 9;
   var state = { cls: '', pos: '', done: {}, seen: {}, code: '', page: {} };
   var CODES = ['PARENTS26', 'KNIGHTS26', 'INHOME-DEMO'];
-  function unlocked() { return CODES.indexOf((state.code || '').toUpperCase()) >= 0; }
+  var ALPHA = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789', TEMP_DAYS = 30;
+  function tempValid(code) {
+    code = (code || '').toUpperCase();
+    if (!/^FAM-[A-Z2-9]{4}$/.test(code)) return false;
+    var b = code.slice(4, 7), sum = 0;
+    for (var i = 0; i < 3; i++) sum += b.charCodeAt(i);
+    if (ALPHA[sum % ALPHA.length] !== code.charAt(7)) return false;
+    var issued = state.codeIssued || 0;
+    return issued > 0 && (Date.now() - issued) < TEMP_DAYS * 86400000;
+  }
+  function unlocked() { var c = (state.code || '').toUpperCase(); return CODES.indexOf(c) >= 0 || tempValid(c); }
   var REC = { '2027': 9, '2028': 3, '2029': 1, '2030': 1, '2031': 1 };
   var POSNAME = { qb: 'quarterback', rb: 'running back', wr: 'wide receiver', te: 'tight end', ot: 'offensive tackle', og: 'guard', c: 'center', de: 'defensive end', edge: 'edge rusher', dt: 'defensive tackle', lb: 'linebacker', cb: 'cornerback', s: 'safety', k: 'kicker', p: 'punter', ls: 'long snapper', ath: 'athlete' };
   var POSTIP = {
@@ -380,15 +390,18 @@
     var first = document.querySelector('main .lesson');
     var g = document.createElement('div'); g.className = 'gate';
     g.innerHTML = '<div class="box"><p class="eyebrow">School code</p><h3>This module is for families on InHome</h3>' +
-      '<p>The Parent Playbook is free for every football family at a school on the InHome High School license. Enter the code your head coach or athletic director gave you. Module 1 is open to everyone.</p>' +
+      '<p>The Parent Playbook is free for every football family at a school on the InHome High School license. Enter the code your head coach or athletic director gave you. No code at your school yet? <a href="/parents#setup">Set up his profile</a> and we will give you a temporary one on the spot.</p>' +
       '<form id="gate-form"><input id="gate-in" type="text" placeholder="School code" autocomplete="off" autocapitalize="characters"><button class="btn" type="submit">Open the Playbook</button></form>' +
-      '<p class="err" id="gate-err">That code is not on the list. Check it with your coach or AD, or <a href="/schools">ask us to bring InHome to your school</a>.</p>' +
+      '<p class="err" id="gate-err">That code is not on the list, or a temporary code has expired. Check it with your coach or AD, or <a href="/parents#setup">get a temporary code here</a>.</p>' +
       '<p class="fine" style="margin:16px 0 0">No code yet? <a href="/playbook/1">Start with Module 1</a>, it is open.</p></div>';
     if (first) first.parentNode.insertBefore(g, first);
     g.querySelector('#gate-form').addEventListener('submit', function (e) {
       e.preventDefault(); var v = g.querySelector('#gate-in').value.trim().toUpperCase();
-      if (CODES.indexOf(v) >= 0) { state.code = v; save(); body.classList.remove('gated'); g.remove(); openPanel(true); say('Code accepted. Welcome in. Pick his class below if you have not, and I will grade the quizzes for his year.', 'coach'); }
-      else { g.querySelector('#gate-err').style.display = 'block'; }
+      var isTemp = /^FAM-/.test(v);
+      if (isTemp && !state.codeIssued) { state.codeIssued = Date.now(); }
+      state.code = v;
+      if (CODES.indexOf(v) >= 0 || tempValid(v)) { save(); body.classList.remove('gated'); g.remove(); openPanel(true); say('Code accepted. Welcome in. Pick his class below if you have not, and I will grade the quizzes for his year.', 'coach'); }
+      else { state.code = ''; state.codeIssued = 0; g.querySelector('#gate-err').style.display = 'block'; }
     });
   }
 

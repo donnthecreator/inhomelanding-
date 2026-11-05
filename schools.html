@@ -260,6 +260,22 @@
   .watch figcaption{display:flex;flex-direction:column;gap:4px;font-size:14px;color:#B9B9B6}
   .watch figcaption strong{color:var(--bone);font-size:16px}
   @media (max-width:560px){.watch-grid{grid-template-columns:1fr}}
+
+  /* ---------- consent + codes + legal ---------- */
+  .check{display:flex;gap:12px;align-items:flex-start;font-size:13.5px;color:#C9C9C6;line-height:1.5;cursor:pointer;font-family:var(--body,Inter,system-ui,sans-serif);font-weight:400;letter-spacing:0;text-transform:none}
+  .check input{margin:3px 0 0;width:16px;height:16px;flex:none;accent-color:var(--signal)}
+  .check a{color:var(--bone)}
+  .consent{margin:22px 0 0;padding:18px 0 4px;border-top:1px solid var(--line);display:grid;gap:14px}
+  .nocode-only[hidden]{display:none !important}
+  .bigcode{font-family:var(--mono);font-size:clamp(30px,5vw,44px);font-weight:700;letter-spacing:.14em;color:var(--bone);background:var(--ink);border:1px solid var(--signal);border-radius:3px;padding:16px 20px;margin:12px 0 18px;display:inline-block}
+  .legal{max-width:76ch}
+  .legal h2{font-size:clamp(22px,2.6vw,28px);margin:38px 0 10px}
+  .legal h2:first-child{margin-top:0}
+  .legal p,.legal li{color:#C9C9C6;font-size:15.5px;line-height:1.65}
+  .legal ul{padding-left:20px;margin:10px 0 0}
+  .legal li{margin:8px 0}
+  .legal a{color:var(--bone)}
+  .legal strong{color:var(--bone)}
 </style>
 </head>
 <body data-page="schools">
@@ -282,7 +298,7 @@
     <p class="lede" style="font-size:16px;color:var(--mute);margin-top:14px">Free with the InHome High School license. Built from the same film-first evaluation college staffs get from us.</p>
     <div class="cta-row">
       <a class="btn" href="#inquire">Bring it to my school</a>
-      <a class="btn ghost" href="/parents">Set up my athlete</a>
+      <a class="btn ghost" href="#setup">Set up my athlete</a>
       <a class="btn ghost" href="#assistant">Talk to Coach AI</a>
     </div>
   </div>
@@ -427,6 +443,183 @@
     </div>
   </section>
 
+  <section id="setup">
+    <div class="wrap">
+      <div class="intake-grid">
+        <div>
+          <p class="eyebrow">Parents</p>
+          <h2>Set up his profile</h2>
+          <p class="section-lede">If your school is on InHome, enter the code your coach or AD gave you and Coach AI starts with his class, his position and his film. If your school is not on yet, tick the box, give us your number and your head coach's, and we hand you a temporary code on the spot that opens the Playbook for 30 days while we talk to the school.</p>
+          <ul class="checklist">
+            <li><span class="n">01</span><span>Be honest in here. Coach AI gives better answers to a 2.4 GPA it knows about than a 3.5 it was told.</span></li>
+            <li><span class="n">02</span><span>His core-course GPA is the one the NCAA uses and it is usually lower than the report card. "Not sure" is a fine answer.</span></li>
+            <li><span class="n">03</span><span>Nothing on this form is shared with a college program, an agent or a trainer. <a href="/privacy">How we handle it.</a></span></li>
+          </ul>
+        </div>
+        <div class="form-panel" id="p-panel">
+          <div class="form-body">
+            <p class="eyebrow" style="margin-bottom:18px">His profile</p>
+            <form id="p-parent-form" name="parent-onboarding" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+              <input type="hidden" name="form-name" value="parent-onboarding">
+              <p class="hp"><label>Skip this field <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+
+              <div class="fields">
+                <div class="field full">
+                  <label for="p-code">School code</label>
+                  <input id="p-code" name="school_code" type="text" placeholder="From your coach or AD" autocomplete="off" style="text-transform:uppercase">
+                  <label class="check" style="margin-top:10px"><input type="checkbox" id="p-nocode" name="no_school_code" value="yes"><span>My school does not have a code yet. Give me a temporary one.</span></label>
+                </div>
+                <div class="field full nocode-only" hidden>
+                  <div class="straight" style="margin:4px 0 6px;padding:16px 18px">
+                    <p class="eyebrow">Temporary code</p>
+                    <p style="margin:8px 0 0">We will give you a code on the next screen that opens the Playbook for 30 days. In return we ask for your number and your head coach's, so we can reach the school about putting every family on InHome at no cost to them.</p>
+                  </div>
+                </div>
+                <div class="field nocode-only" hidden>
+                  <label for="p-coach">Head coach's name <span class="req">*</span></label>
+                  <input id="p-coach" name="coach_name" type="text" autocomplete="off">
+                </div>
+                <div class="field nocode-only" hidden>
+                  <label for="p-coachphone">Head coach's phone <span class="req">*</span></label>
+                  <input id="p-coachphone" name="coach_phone" type="tel" autocomplete="off" placeholder="School office number is fine">
+                </div>
+                <div class="field full nocode-only" hidden>
+                  <label for="p-coachemail">Head coach's email</label>
+                  <input id="p-coachemail" name="coach_email" type="email" autocomplete="off">
+                </div>
+
+                <div class="field full"><p class="eyebrow quiet" style="margin:10px 0 0">About you</p></div>
+                <div class="field">
+                  <label for="p-pname">Your name <span class="req">*</span></label>
+                  <input id="p-pname" name="parent_name" type="text" required autocomplete="name">
+                </div>
+                <div class="field">
+                  <label for="p-rel">Relationship <span class="req">*</span></label>
+                  <select id="p-rel" name="relationship" required>
+                    <option value="">Select</option>
+                    <option>Mother</option><option>Father</option><option>Guardian</option><option>Other family</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="p-pemail">Email <span class="req">*</span></label>
+                  <input id="p-pemail" name="parent_email" type="email" required autocomplete="email">
+                </div>
+                <div class="field">
+                  <label for="p-pphone">Mobile phone <span class="req">*</span></label>
+                  <input id="p-pphone" name="parent_phone" type="tel" required autocomplete="tel">
+                </div>
+
+                <div class="field full"><p class="eyebrow quiet" style="margin:10px 0 0">About him</p></div>
+                <div class="field">
+                  <label for="p-aname">Athlete's name <span class="req">*</span></label>
+                  <input id="p-aname" name="athlete_name" type="text" required>
+                </div>
+                <div class="field">
+                  <label for="p-grad">Class of <span class="req">*</span></label>
+                  <select id="p-grad" name="grad_year" required>
+                    <option value="">Select</option>
+                    <option>2027</option><option>2028</option><option>2029</option><option>2030</option><option>2031</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="p-pos">Position <span class="req">*</span></label>
+                  <input id="p-pos" name="position" type="text" required placeholder="CB, DL, WR">
+                </div>
+                <div class="field">
+                  <label for="p-ht">Height and weight</label>
+                  <input id="p-ht" name="height_weight" type="text" placeholder="6'1&quot; / 185">
+                </div>
+                <div class="field">
+                  <label for="p-school">High school <span class="req">*</span></label>
+                  <input id="p-school" name="school" type="text" required>
+                </div>
+                <div class="field">
+                  <label for="p-city">City and state <span class="req">*</span></label>
+                  <input id="p-city" name="city_state" type="text" required placeholder="Tuscaloosa, AL">
+                </div>
+                <div class="field full">
+                  <label for="p-hudl">Hudl link</label>
+                  <input id="p-hudl" name="hudl" type="url" placeholder="https://www.hudl.com/profile/..." autocomplete="url">
+                </div>
+
+                <div class="field full"><p class="eyebrow quiet" style="margin:10px 0 0">Where he stands</p></div>
+                <div class="field">
+                  <label for="p-gpa">Core-course GPA</label>
+                  <select id="p-gpa" name="core_gpa">
+                    <option value="">Not sure</option>
+                    <option>3.5 or above</option><option>3.0 to 3.4</option><option>2.5 to 2.9</option><option>2.3 to 2.4</option><option>Below 2.3</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="p-ec">NCAA Eligibility Center</label>
+                  <select id="p-ec" name="eligibility_center">
+                    <option value="">Not sure</option>
+                    <option>Registered</option><option>Not registered yet</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="p-interest">College interest so far</label>
+                  <select id="p-interest" name="interest">
+                    <option value="">Select</option>
+                    <option>None yet</option><option>Camp invites only</option><option>Coaches have reached out</option><option>Has an offer</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="p-level">Where you think he fits</label>
+                  <select id="p-level" name="target_level">
+                    <option value="">Honestly not sure</option>
+                    <option>FBS</option><option>FCS</option><option>Division II</option><option>Division III</option><option>NAIA</option><option>JUCO</option>
+                  </select>
+                </div>
+                <div class="field full">
+                  <label for="p-agents">Anyone contacted you about representation or NIL?</label>
+                  <textarea id="p-agents" name="agent_contact" placeholder="Who, what they offered, what they asked for. Coach reads these."></textarea>
+                </div>
+                <div class="field full">
+                  <label for="p-goal">What do you most want answered right now?</label>
+                  <textarea id="p-goal" name="first_question" placeholder="The question you have not wanted to ask the coach."></textarea>
+                </div>
+              </div>
+
+              <div class="consent">
+                <p class="eyebrow quiet" style="margin:0 0 12px">Before you send it</p>
+                <label class="check"><input type="checkbox" id="p-c-guardian" name="consent_guardian" value="yes" required><span>I am the parent or legal guardian of the athlete named above. He is at least 13 years old, and I consent to InHome collecting and using the information on this form about him as described in the <a href="/privacy" target="_blank" rel="noopener">Privacy Notice</a>.</span></label>
+                <label class="check"><input type="checkbox" id="p-c-contact" name="consent_contact" value="yes" required><span>I agree that InHome (Athlete's Inc+) may contact me by phone call, text message and email at the number and address I provided, about my athlete's recruiting, the Parent Playbook and the InHome High School program. Message and data rates may apply. Message frequency varies. Consent to receive texts is not a condition of any purchase. Reply STOP to any text to opt out and HELP for help.</span></label>
+                <label class="check nocode-only" hidden><input type="checkbox" id="p-c-coach" name="consent_coach" value="yes"><span>The coach contact information I provided is the school's published contact information or I have the coach's permission to share it. I understand InHome will contact the coach only about the InHome High School program.</span></label>
+                <label class="check"><input type="checkbox" id="p-c-terms" name="consent_terms" value="yes" required><span>I have read the <a href="/privacy" target="_blank" rel="noopener">Privacy Notice and Terms of Use</a>. I understand that InHome is not an agent, does not represent athletes, and that nothing on this site is legal advice, eligibility advice, or a promise of contact from any college program.</span></label>
+              </div>
+              <input type="hidden" name="issued_code" id="p-issued" value="">
+              <input type="hidden" name="code_path" id="p-path" value="school">
+              <input type="hidden" name="source_page" id="p-source" value="">
+
+              <div class="form-foot">
+                <button class="btn" type="submit" id="p-submit-btn">Set up his profile</button>
+                <p class="fine">Coach opens the right module for his class as soon as you hit send.</p>
+              </div>
+              <p class="status" id="p-status"></p>
+              <p class="fine" style="margin-top:16px">This information runs Coach AI and the Parent Playbook for your family and, if your school is on InHome, is visible to your school. It is never sold, and it is not shared with college programs, agents or trainers unless you ask us to. Full details in the <a href="/privacy">Privacy Notice</a>.</p>
+            </form>
+          </div>
+
+          <div class="done" id="p-done" role="status">
+            <div id="p-done-school">
+              <p class="eyebrow">Received</p>
+              <h3>Coach has him</h3>
+              <p>Check the email you gave us. Your school's InHome access, Module 1 and Coach AI are on the way. If the school code did not match, we will tell you what to do instead.</p>
+            </div>
+            <div id="p-done-ind" hidden>
+              <p class="eyebrow">Your temporary code</p>
+              <div class="bigcode" id="p-bigcode"></div>
+              <h3>The Playbook is open</h3>
+              <p>That code is good for 30 days and it is already working on this device. Write it down for his other parent, or anyone else in the house, and enter it on any module page. We will call you, and we will reach out to <span id="p-coach-echo">his coach</span> about putting every family at the school on InHome at no cost to the school.</p>
+              <div class="cta-row" style="margin-top:18px"><a class="btn" id="p-open" href="/playbook">Open his Playbook</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="inquire" class="closing">
     <div class="wrap">
       <div class="intake-grid">
@@ -519,6 +712,7 @@
       <a href="/start">Start here</a>
       <a href="/playbook">Playbook</a>
       <a href="/faq">FAQ</a>
+      <a href="/privacy">Privacy</a>
       <a href="https://inhomecollegeprospects.com">Coach portal</a>
       <a href="https://inhomecollegescouts.com">Scout portal</a>
       <a href="mailto:info@inhomerecruiting.com">info@inhomerecruiting.com</a>
@@ -626,6 +820,87 @@
       status.textContent = 'That did not send. Email info@inhomerecruiting.com with your school and role and we will pick it up there.';
     });
   });
+
+  /* ---------- parent profile form (shared by /parents and /schools) ---------- */
+  (function () {
+    var form = document.getElementById('p-parent-form');
+    if (!form) return;
+    var panel = document.getElementById('p-panel');
+    var btn = document.getElementById('p-submit-btn');
+    var status = document.getElementById('p-status');
+    var noCode = document.getElementById('p-nocode');
+    var codeIn = document.getElementById('p-code');
+    var coachName = document.getElementById('p-coach');
+    var coachPhone = document.getElementById('p-coachphone');
+    var coachConsent = document.getElementById('p-c-coach');
+    var onlyNoCode = form.parentNode.querySelectorAll('.nocode-only');
+    document.getElementById('p-source').value = location.pathname;
+
+    function setMode() {
+      var ind = noCode.checked;
+      for (var i = 0; i < onlyNoCode.length; i++) onlyNoCode[i].hidden = !ind;
+      coachName.required = ind; coachPhone.required = ind; coachConsent.required = ind;
+      codeIn.disabled = ind; if (ind) codeIn.value = '';
+      document.getElementById('p-path').value = ind ? 'independent' : 'school';
+      btn.textContent = ind ? 'Get my temporary code' : 'Set up his profile';
+    }
+    noCode.addEventListener('change', setMode);
+    codeIn.addEventListener('input', function () { if (codeIn.value.trim() && noCode.checked) { noCode.checked = false; setMode(); } });
+    setMode();
+
+    var ALPHA = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    function makeCode() {
+      var body = '', sum = 0;
+      for (var i = 0; i < 3; i++) { var c = ALPHA[Math.floor(Math.random() * ALPHA.length)]; body += c; sum += c.charCodeAt(0); }
+      return 'FAM-' + body + ALPHA[sum % ALPHA.length];
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      status.className = 'status';
+      var ind = noCode.checked;
+      if (!ind && !codeIn.value.trim()) {
+        status.className = 'status err';
+        status.textContent = 'Enter your school code, or tick the box to get a temporary one.';
+        codeIn.focus(); return;
+      }
+      var issued = ind ? makeCode() : '';
+      document.getElementById('p-issued').value = issued;
+      btn.disabled = true; btn.textContent = 'Sending...';
+      var data = new URLSearchParams(new FormData(form)).toString();
+      fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: data })
+        .then(function (res) {
+          if (!res.ok) throw new Error(res.status);
+          var grad = document.getElementById('p-grad').value;
+          var cs = document.getElementById('p-city').value;
+          var st = (cs.split(',').pop() || '').trim().slice(0, 2).toUpperCase();
+          // remember class, position hint and (if issued) the code, for Coach AI and the gate
+          try {
+            var KEY = 'inhome_pb';
+            var sv = JSON.parse(localStorage.getItem(KEY) || '{}') || {};
+            sv.cls = grad || sv.cls;
+            if (ind) { sv.code = issued; sv.codeIssued = Date.now(); }
+            else { sv.code = codeIn.value.trim().toUpperCase(); sv.codeIssued = 0; }
+            localStorage.setItem(KEY, JSON.stringify(sv));
+          } catch (err) {}
+          if (ind) {
+            document.getElementById('p-bigcode').textContent = issued;
+            var cn = coachName.value.trim(); if (cn) document.getElementById('p-coach-echo').textContent = 'Coach ' + cn.split(' ').pop();
+            document.getElementById('p-done-school').hidden = true;
+            document.getElementById('p-done-ind').hidden = false;
+            document.getElementById('p-open').href = '/playbook?class=' + encodeURIComponent(grad);
+            panel.classList.add('is-done');
+            panel.scrollIntoView({ block: 'center' });
+          } else {
+            window.location.href = '/start?class=' + encodeURIComponent(grad) + (st.length === 2 ? '&state=' + st : '');
+          }
+        }).catch(function () {
+          btn.disabled = false; setMode();
+          status.className = 'status err';
+          status.textContent = 'That did not send. Email info@inhomerecruiting.com with his name and school and we will set him up by hand.';
+        });
+    });
+  })();
 </script>
 <script src="/coach.js" defer></script>
 </body>

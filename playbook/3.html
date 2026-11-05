@@ -261,6 +261,22 @@
   .watch figcaption strong{color:var(--bone);font-size:16px}
   @media (max-width:560px){.watch-grid{grid-template-columns:1fr}}
 
+  /* ---------- consent + codes + legal ---------- */
+  .check{display:flex;gap:12px;align-items:flex-start;font-size:13.5px;color:#C9C9C6;line-height:1.5;cursor:pointer;font-family:var(--body,Inter,system-ui,sans-serif);font-weight:400;letter-spacing:0;text-transform:none}
+  .check input{margin:3px 0 0;width:16px;height:16px;flex:none;accent-color:var(--signal)}
+  .check a{color:var(--bone)}
+  .consent{margin:22px 0 0;padding:18px 0 4px;border-top:1px solid var(--line);display:grid;gap:14px}
+  .nocode-only[hidden]{display:none !important}
+  .bigcode{font-family:var(--mono);font-size:clamp(30px,5vw,44px);font-weight:700;letter-spacing:.14em;color:var(--bone);background:var(--ink);border:1px solid var(--signal);border-radius:3px;padding:16px 20px;margin:12px 0 18px;display:inline-block}
+  .legal{max-width:76ch}
+  .legal h2{font-size:clamp(22px,2.6vw,28px);margin:38px 0 10px}
+  .legal h2:first-child{margin-top:0}
+  .legal p,.legal li{color:#C9C9C6;font-size:15.5px;line-height:1.65}
+  .legal ul{padding-left:20px;margin:10px 0 0}
+  .legal li{margin:8px 0}
+  .legal a{color:var(--bone)}
+  .legal strong{color:var(--bone)}
+
   /* ---------- playbook ---------- */
   .mod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:2px;margin-top:40px}
   .mod{background:var(--ink);padding:26px 24px 28px;display:flex;flex-direction:column;gap:10px;text-decoration:none;color:inherit;transition:.15s}
@@ -447,6 +463,7 @@
       <a href="/start">Start here</a>
       <a href="/playbook">Playbook</a>
       <a href="/faq">FAQ</a>
+      <a href="/privacy">Privacy</a>
       <a href="https://inhomecollegeprospects.com">Coach portal</a>
       <a href="https://inhomecollegescouts.com">Scout portal</a>
       <a href="mailto:info@inhomerecruiting.com">info@inhomerecruiting.com</a>
