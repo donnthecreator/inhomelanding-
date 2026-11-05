@@ -7,7 +7,7 @@
   var KEY = 'inhome_pb';
   var CLASSES = ['2027', '2028', '2029', '2030', '2031'];
   var TOTAL = 9;
-  var state = { cls: '', pos: '', done: {}, seen: {}, code: '' };
+  var state = { cls: '', pos: '', done: {}, seen: {}, code: '', page: {} };
   var CODES = ['PARENTS26', 'KNIGHTS26', 'INHOME-DEMO'];
   function unlocked() { return CODES.indexOf((state.code || '').toUpperCase()) >= 0; }
   var REC = { '2027': 9, '2028': 3, '2029': 1, '2030': 1, '2031': 1 };
@@ -73,7 +73,7 @@
 .ch-ask input{flex:1;background:var(--ink,#050506);border:1px solid var(--line,rgba(237,237,234,.14));color:var(--bone,#EDEDEA);padding:10px 12px;border-radius:2px;font:inherit;font-size:14px}\
 .ch-ask button{font-family:var(--mono,monospace);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:var(--signal,#E5231D);color:#fff;border:0;padding:0 14px;border-radius:2px;cursor:pointer}\
 /* progress + quiz */\
-.gate{margin:0 auto;max-width:720px;padding:0 var(--gut,24px)}.gate .box{background:var(--panel,#0D0D0F);border:1px solid var(--signal,#E5231D);border-radius:3px;padding:clamp(22px,3.4vw,34px);margin:30px 0 10px}.gate h3{font-family:var(--display,Anton,Impact,sans-serif);font-weight:400;font-size:30px;line-height:1.05;text-transform:uppercase;margin:10px 0 8px}.gate p{color:#C9C9C6;margin:0 0 16px;max-width:60ch}.gate form{display:flex;gap:8px;flex-wrap:wrap}.gate input{flex:1;min-width:200px;background:var(--ink,#050506);border:1px solid var(--line,rgba(237,237,234,.14));color:var(--bone,#EDEDEA);padding:12px 14px;border-radius:2px;font:inherit;font-size:16px;letter-spacing:.08em;text-transform:uppercase}.gate .err{color:var(--signal,#E5231D);font-size:14px;margin:10px 0 0;display:none}body.gated .lesson,body.gated .closing{filter:blur(6px);pointer-events:none;user-select:none;max-height:420px;overflow:hidden;position:relative}\
+.pager{display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:space-between;padding-top:30px;padding-bottom:6px;border-top:1px solid var(--line,rgba(237,237,234,.14))}.pager[hidden]{display:none}.pager .pbar{display:flex;flex-direction:column;align-items:center;gap:9px;order:0}.pager .pcount{font-family:var(--mono,monospace);font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--mute,#8E8E93)}.pager .pdots{display:flex;gap:6px}.pager .pdot{width:26px;height:4px;border:0;border-radius:2px;background:rgba(237,237,234,.18);cursor:pointer;padding:0}.pager .pdot.seen{background:rgba(229,35,29,.5)}.pager .pdot.on{background:var(--signal,#E5231D)}.pager .btn:disabled{opacity:.3;cursor:default}.toc a.on{color:var(--signal,#E5231D)}@media (max-width:620px){.pager{gap:12px}.pager .pbar{order:-1;width:100%}.pager .btn{flex:1;justify-content:center;text-align:center}}.gate{margin:0 auto;max-width:720px;padding:0 var(--gut,24px)}.gate .box{background:var(--panel,#0D0D0F);border:1px solid var(--signal,#E5231D);border-radius:3px;padding:clamp(22px,3.4vw,34px);margin:30px 0 10px}.gate h3{font-family:var(--display,Anton,Impact,sans-serif);font-weight:400;font-size:30px;line-height:1.05;text-transform:uppercase;margin:10px 0 8px}.gate p{color:#C9C9C6;margin:0 0 16px;max-width:60ch}.gate form{display:flex;gap:8px;flex-wrap:wrap}.gate input{flex:1;min-width:200px;background:var(--ink,#050506);border:1px solid var(--line,rgba(237,237,234,.14));color:var(--bone,#EDEDEA);padding:12px 14px;border-radius:2px;font:inherit;font-size:16px;letter-spacing:.08em;text-transform:uppercase}.gate .err{color:var(--signal,#E5231D);font-size:14px;margin:10px 0 0;display:none}body.gated .lesson,body.gated .closing{filter:blur(6px);pointer-events:none;user-select:none;max-height:420px;overflow:hidden;position:relative}\
 .pb-prog{margin-top:34px;background:var(--panel,#0D0D0F);border:1px solid var(--line,rgba(237,237,234,.14));border-radius:3px;padding:22px 24px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}\
 .pb-prog .bar{height:8px;background:var(--panel-2,#141417);border-radius:4px;overflow:hidden;margin-top:12px}\
 .pb-prog .bar i{display:block;height:100%;width:0;background:var(--signal,#E5231D);transition:width .6s ease}\
@@ -295,6 +295,69 @@
     if (redo) redo.addEventListener('click', function (e) { e.preventDefault(); if (introSec) { introSec.style.display = ''; introSec.scrollIntoView({ behavior: 'smooth' }); } });
     }
     render();
+  }
+
+  /* ---------------- module pages: one lesson at a time ---------------- */
+  if (PAGE === 'module' && !body.classList.contains('gated')) {
+    var lessons = [].slice.call(document.querySelectorAll('main .lesson'));
+    var closing = document.querySelector('main .closing');
+    var tocLinks = [].slice.call(document.querySelectorAll('.toc a'));
+    if (lessons.length && closing) {
+      var N = lessons.length, cur = 0;
+      var pager = document.createElement('div');
+      pager.className = 'wrap pager';
+      pager.innerHTML = '<button class="btn ghost" type="button" data-prev>Back</button>' +
+        '<div class="pbar"><span class="pcount"></span><div class="pdots"></div></div>' +
+        '<button class="btn" type="button" data-next></button>';
+      closing.parentNode.insertBefore(pager, closing);
+      var dots = pager.querySelector('.pdots');
+      for (var d = 0; d < N; d++) {
+        var s = document.createElement('button');
+        s.type = 'button'; s.className = 'pdot'; s.setAttribute('aria-label', 'Lesson ' + (d + 1));
+        (function (idx) { s.addEventListener('click', function () { go(idx); }); })(d);
+        dots.appendChild(s);
+      }
+      var prevBtn = pager.querySelector('[data-prev]'), nextBtn = pager.querySelector('[data-next]');
+      var countEl = pager.querySelector('.pcount');
+
+      function go(i, noScroll) {
+        cur = Math.max(0, Math.min(N, i));
+        lessons.forEach(function (l, j) { l.hidden = j !== cur; });
+        var last = cur >= N;
+        closing.hidden = !last;
+        pager.hidden = false;
+        prevBtn.disabled = cur === 0;
+        prevBtn.textContent = cur === 0 ? 'Back' : (cur >= N ? 'Back to lesson ' + N : 'Back');
+        nextBtn.textContent = last ? 'Back to the lessons' : (cur === N - 1 ? 'Finish the module' : 'Next lesson');
+        countEl.textContent = last ? 'Module ' + MOD + ' wrap-up' : 'Lesson ' + (cur + 1) + ' of ' + N;
+        [].forEach.call(dots.children, function (x, j) { x.className = 'pdot' + (j === cur ? ' on' : (j < cur ? ' seen' : '')); });
+        tocLinks.forEach(function (a, j) { a.className = j === cur ? 'on' : ''; });
+        state.page[MOD] = cur; save();
+        if (!noScroll) {
+          var top = (last ? closing : lessons[cur]).getBoundingClientRect().top + window.pageYOffset - 76;
+          window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+        }
+        try { history.replaceState(null, '', last ? '#wrap-up' : '#l' + (cur + 1)); } catch (e) {}
+      }
+      nextBtn.addEventListener('click', function () { go(cur >= N ? 0 : cur + 1); });
+      prevBtn.addEventListener('click', function () { go(cur - 1); });
+      tocLinks.forEach(function (a, j) { a.addEventListener('click', function (e) { e.preventDefault(); go(j); }); });
+      document.addEventListener('keydown', function (e) {
+        if (e.target && /input|textarea|select/i.test(e.target.tagName)) return;
+        if (e.key === 'ArrowRight') go(cur + 1);
+        if (e.key === 'ArrowLeft') go(cur - 1);
+      });
+      window.addEventListener('hashchange', function () {
+        var h = (location.hash || '').replace('#', '');
+        if (h === 'wrap-up') go(N);
+        else if (/^l\d+$/.test(h)) go(parseInt(h.slice(1), 10) - 1);
+      });
+      var start = 0, hash = (location.hash || '').replace('#', '');
+      if (hash === 'wrap-up') start = N;
+      else if (/^l\d+$/.test(hash)) start = parseInt(hash.slice(1), 10) - 1;
+      else if (typeof state.page[MOD] === 'number') start = state.page[MOD];
+      go(start, true);
+    }
   }
 
   /* ---------------- module page: quiz ---------------- */
