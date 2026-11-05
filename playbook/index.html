@@ -295,6 +295,26 @@
   .toc a{text-decoration:none;color:#C9C9C6}.toc a:hover{color:var(--bone)}
   .toc .n{font-family:var(--mono);font-size:11px;color:var(--signal);margin-right:10px}
 
+  .doc{margin:26px 0 0;border:1px solid var(--line);border-radius:3px;background:var(--panel);padding:clamp(20px,3vw,30px)}
+  .doc .doclabel{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--signal);margin:0 0 14px;line-height:1.5}
+  .doc h4{font-family:var(--display);font-weight:400;font-size:24px;line-height:1.1;text-transform:uppercase;margin:0 0 6px;letter-spacing:.02em}
+  dl.clauses{margin:16px 0 0}
+  dl.clauses dt{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--bone);padding-top:18px;border-top:1px solid var(--line)}
+  dl.clauses dd{margin:8px 0 18px;color:#B9B9B6;font-size:15px;font-style:italic;max-width:70ch}
+  dl.clauses dd .note{display:block;margin-top:10px;font-style:normal;color:#C9C9C6;border-left:2px solid var(--signal);padding-left:14px}
+  ul.rates{list-style:none;margin:18px 0 0;padding:0}
+  ul.rates li{padding:11px 0;border-top:1px solid var(--line);color:#C9C9C6;font-size:15.5px;max-width:70ch}
+  ul.rates strong{color:var(--bone)}
+  .lesson-grid.wide{grid-template-columns:minmax(0,1fr)}
+  .lesson-grid.wide .vslot{max-width:560px}
+  .lesson-grid.wide .vslot.vert{max-width:300px}
+  .lesson-grid.wide .body p{max-width:none}
+  table.aidtable{width:100%;border-collapse:collapse;margin:24px 0 0;font-size:14.5px}
+  table.aidtable th{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--signal);text-align:left;padding:0 14px 10px 0;border-bottom:1px solid var(--line)}
+  table.aidtable td{padding:14px 14px 14px 0;border-bottom:1px solid var(--line);color:#C9C9C6;vertical-align:top}
+  table.aidtable td:first-child{color:var(--bone);width:22%}
+  table.aidtable td:nth-child(2){width:22%}
+  @media (max-width:760px){table.aidtable,table.aidtable tbody,table.aidtable tr,table.aidtable td{display:block;width:auto}table.aidtable thead{display:none}table.aidtable tr{border-bottom:1px solid var(--line);padding:14px 0}table.aidtable td{border:0;padding:3px 0}table.aidtable td:first-child{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--signal);width:auto}table.aidtable td:nth-child(2){width:auto;color:var(--bone)}}
   .intro{margin-top:40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.85fr);gap:clamp(24px,4vw,56px);align-items:start}
   .steps{list-style:none;margin:22px 0 0;padding:0;counter-reset:s}
   .steps li{counter-increment:s;display:flex;gap:14px;padding:13px 0;border-top:1px solid var(--line);font-size:15.5px;color:#DADAD7}
@@ -328,7 +348,7 @@
 <main id="top">
   <div class="wrap hero">
     <p class="eyebrow">The Parent Playbook</p>
-    <h1>nine things<br><span class="red">they believe.</span></h1>
+    <h1>parents get<br><span class="red">recruited too.</span></h1>
     <p class="lede">Every module in this course corrects one thing parents believe about recruiting that costs their son opportunities. Short lessons, a video and the written version of each, a quiz built for his graduating class, and one thing you have to produce before the next module.</p>
     <p class="lede" style="font-size:16px;color:var(--mute);margin-top:14px">Module 1 is open to everyone. The Playbook is free for families at schools on the InHome High School license. Not sure where to start? <a href="/start">The Start page</a> picks the module for his class.</p>
   </div>
@@ -377,7 +397,7 @@
       <p class="eyebrow">The course</p>
       <h2>Nine modules, about five hours</h2>
       <div class="pb-prog" id="pb-prog"></div>
-      <div class="mod-grid"><a class="mod" data-n="1" href="/playbook/1"><span class="num">MODULE 01</span><h3>The Honest Math</h3><p class="belief">&ldquo;He just needs more exposure.&rdquo;</p><span class="meta">5 lessons</span></a><a class="mod" data-n="2" href="/playbook/2"><span class="num">MODULE 02</span><h3>How He Is Actually Evaluated</h3><p class="belief">&ldquo;Stars and rankings are the scoreboard.&rdquo;</p><span class="meta">6 lessons</span></a><a class="mod" data-n="3" href="/playbook/3"><span class="num">MODULE 03</span><h3>Placing Him Honestly</h3><p class="belief">&ldquo;He is a D1 kid.&rdquo;</p><span class="meta">5 lessons</span></a><a class="mod" data-n="4" href="/playbook/4"><span class="num">MODULE 04</span><h3>Film That Survives Ten Seconds</h3><p class="belief">&ldquo;The tape should show everything he can do.&rdquo;</p><span class="meta">5 lessons</span></a><a class="mod" data-n="5" href="/playbook/5"><span class="num">MODULE 05</span><h3>The Calendar</h3><p class="belief">&ldquo;We will start reaching out senior year.&rdquo;</p><span class="meta">5 lessons</span></a><a class="mod" data-n="6" href="/playbook/6"><span class="num">MODULE 06</span><h3>Academic Eligibility</h3><p class="belief">&ldquo;We will fix the grades senior year.&rdquo;</p><span class="meta">6 lessons</span></a><a class="mod" data-n="7" href="/playbook/7"><span class="num">MODULE 07</span><h3>Coach Communication</h3><p class="belief">&ldquo;I will email the coaches for him.&rdquo;</p><span class="meta">6 lessons</span></a><a class="mod" data-n="8" href="/playbook/8"><span class="num">MODULE 08</span><h3>Camps, Combines and Where Money Disappears</h3><p class="belief">&ldquo;More camps means more offers.&rdquo;</p><span class="meta">6 lessons</span></a><a class="mod" data-n="9" href="/playbook/9"><span class="num">MODULE 09</span><h3>Offers, Money and Signing</h3><p class="belief">&ldquo;He got an offer.&rdquo;</p><span class="meta">6 lessons</span></a></div>
+      <div class="mod-grid"><a class="mod" data-n="1" href="/playbook/1"><span class="num">MODULE 01</span><h3>The Honest Math</h3><p class="belief">&ldquo;He just needs more exposure.&rdquo;</p><span class="meta">6 lessons</span></a><a class="mod" data-n="2" href="/playbook/2"><span class="num">MODULE 02</span><h3>How He Is Actually Evaluated</h3><p class="belief">&ldquo;Stars and rankings are the scoreboard.&rdquo;</p><span class="meta">6 lessons</span></a><a class="mod" data-n="3" href="/playbook/3"><span class="num">MODULE 03</span><h3>Placing Him Honestly</h3><p class="belief">&ldquo;He is a D1 kid.&rdquo;</p><span class="meta">5 lessons</span></a><a class="mod" data-n="4" href="/playbook/4"><span class="num">MODULE 04</span><h3>Film That Survives Ten Seconds</h3><p class="belief">&ldquo;The tape should show everything he can do.&rdquo;</p><span class="meta">5 lessons</span></a><a class="mod" data-n="5" href="/playbook/5"><span class="num">MODULE 05</span><h3>The Calendar</h3><p class="belief">&ldquo;We will start reaching out senior year.&rdquo;</p><span class="meta">5 lessons</span></a><a class="mod" data-n="6" href="/playbook/6"><span class="num">MODULE 06</span><h3>Academic Eligibility</h3><p class="belief">&ldquo;We will fix the grades senior year.&rdquo;</p><span class="meta">6 lessons</span></a><a class="mod" data-n="7" href="/playbook/7"><span class="num">MODULE 07</span><h3>Coach Communication</h3><p class="belief">&ldquo;I will email the coaches for him.&rdquo;</p><span class="meta">6 lessons</span></a><a class="mod" data-n="8" href="/playbook/8"><span class="num">MODULE 08</span><h3>Camps, Combines and Where Money Disappears</h3><p class="belief">&ldquo;More camps means more offers.&rdquo;</p><span class="meta">6 lessons</span></a><a class="mod" data-n="9" href="/playbook/9"><span class="num">MODULE 09</span><h3>Offers, Money and Signing</h3><p class="belief">&ldquo;He got an offer.&rdquo;</p><span class="meta">8 lessons</span></a></div>
       <p class="fine" style="margin-top:22px;max-width:78ch">Rules and dates are current for the 2026-27 cycle and get rewritten every August. Nothing in this course is legal advice or an eligibility determination; the NCAA Eligibility Center and your school counselor make those calls. Taking the course is not a scouting submission and does not put a player on any college board.</p>
     </div>
   </section>
@@ -395,6 +415,7 @@
       <a href="/parents">For parents</a>
       <a href="/start">Start here</a>
       <a href="/playbook">Playbook</a>
+      <a href="/faq">FAQ</a>
       <a href="https://inhomecollegeprospects.com">Coach portal</a>
       <a href="https://inhomecollegescouts.com">Scout portal</a>
       <a href="mailto:info@inhomerecruiting.com">info@inhomerecruiting.com</a>

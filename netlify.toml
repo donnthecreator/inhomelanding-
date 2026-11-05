@@ -17,3 +17,8 @@
   from = "/parents"
   to = "/parents.html"
   status = 200
+
+[[redirects]]
+  from = "/faq"
+  to = "/faq.html"
+  status = 200
