@@ -7,7 +7,9 @@
   var KEY = 'inhome_pb';
   var CLASSES = ['2027', '2028', '2029', '2030', '2031'];
   var TOTAL = 9;
-  var state = { cls: '', done: {}, seen: {} };
+  var state = { cls: '', done: {}, seen: {}, code: '' };
+  var CODES = ['PARENTS26', 'KNIGHTS26', 'INHOME-DEMO'];
+  function unlocked() { return CODES.indexOf((state.code || '').toUpperCase()) >= 0; }
   function load() {
     try { var s = JSON.parse(localStorage.getItem(KEY) || '{}'); if (s && typeof s === 'object') state = Object.assign(state, s); } catch (e) {}
     try {
@@ -59,6 +61,7 @@
 .ch-ask input{flex:1;background:var(--ink,#050506);border:1px solid var(--line,rgba(237,237,234,.14));color:var(--bone,#EDEDEA);padding:10px 12px;border-radius:2px;font:inherit;font-size:14px}\
 .ch-ask button{font-family:var(--mono,monospace);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:var(--signal,#E5231D);color:#fff;border:0;padding:0 14px;border-radius:2px;cursor:pointer}\
 /* progress + quiz */\
+.gate{margin:0 auto;max-width:720px;padding:0 var(--gut,24px)}.gate .box{background:var(--panel,#0D0D0F);border:1px solid var(--signal,#E5231D);border-radius:3px;padding:clamp(22px,3.4vw,34px);margin:30px 0 10px}.gate h3{font-family:var(--display,Anton,Impact,sans-serif);font-weight:400;font-size:30px;line-height:1.05;text-transform:uppercase;margin:10px 0 8px}.gate p{color:#C9C9C6;margin:0 0 16px;max-width:60ch}.gate form{display:flex;gap:8px;flex-wrap:wrap}.gate input{flex:1;min-width:200px;background:var(--ink,#050506);border:1px solid var(--line,rgba(237,237,234,.14));color:var(--bone,#EDEDEA);padding:12px 14px;border-radius:2px;font:inherit;font-size:16px;letter-spacing:.08em;text-transform:uppercase}.gate .err{color:var(--signal,#E5231D);font-size:14px;margin:10px 0 0;display:none}body.gated .lesson,body.gated .closing{filter:blur(6px);pointer-events:none;user-select:none;max-height:420px;overflow:hidden;position:relative}\
 .pb-prog{margin-top:34px;background:var(--panel,#0D0D0F);border:1px solid var(--line,rgba(237,237,234,.14));border-radius:3px;padding:22px 24px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}\
 .pb-prog .bar{height:8px;background:var(--panel-2,#141417);border-radius:4px;overflow:hidden;margin-top:12px}\
 .pb-prog .bar i{display:block;height:100%;width:0;background:var(--signal,#E5231D);transition:width .6s ease}\
@@ -103,13 +106,17 @@
 
   /* ---------------- coach avatar ---------------- */
   var AV = '<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="31" fill="#0D0D0F"/>' +
-    '<path d="M12 56c2-11 10-16 20-16s18 5 20 16" fill="#1C1C20"/>' +
-    '<path d="M12 56c2-11 10-16 20-16" stroke="#E5231D" stroke-width="2" fill="none"/>' +
-    '<circle cx="32" cy="27" r="11" fill="#EDEDEA"/>' +
-    '<path d="M19 25c1-8 7-12 13-12s12 4 13 12H19z" fill="#E5231D"/>' +
-    '<path d="M18 25h28l3 3H17z" fill="#B3180F"/>' +
-    '<path d="M22 31c-2 0-3 2-2 4l2 2" stroke="#8E8E93" stroke-width="1.6" fill="none" stroke-linecap="round"/>' +
-    '<circle cx="23" cy="38" r="1.6" fill="#8E8E93"/></svg>';
+    '<path d="M10 58c2-12 11-17 22-17s20 5 22 17" fill="#7A7A80"/>' +
+    '<path d="M24 42c3 6 13 6 16 0l-3 16H27z" fill="#EDEDEA"/>' +
+    '<path d="M28 46l4 12 4-12" fill="#6A6A70"/>' +
+    '<circle cx="32" cy="28" r="10" fill="#EDEDEA"/>' +
+    '<path d="M31 50c-6 0-10 2-12 7" stroke="#2A2A2E" stroke-width="1.5" fill="none"/>' +
+    '<circle cx="19" cy="57" r="2.6" fill="#E5231D"/>' +
+    '<ellipse cx="32" cy="23" rx="20" ry="4.5" fill="#D6B46A"/>' +
+    '<path d="M22 23c0-9 4-13 10-13s10 4 10 13z" fill="#E3C47C"/>' +
+    '<path d="M22 20.5h20v3.5H22z" fill="#E5231D"/>' +
+    '<ellipse cx="32" cy="23" rx="20" ry="4.5" fill="none" stroke="#B89550" stroke-width=".8"/></svg>';
+
 
   /* ---------------- canned knowledge ---------------- */
   var QA = [
@@ -167,7 +174,7 @@
 
   var log = panel.querySelector('#ch-log'), chips = panel.querySelector('#ch-chips'), sub = panel.querySelector('#ch-sub'), clsRow = panel.querySelector('#ch-cls');
   function say(text, who) { var d = document.createElement('div'); d.className = 'ch-msg ' + (who || 'coach'); d.textContent = text; log.appendChild(d); log.scrollTop = log.scrollHeight; }
-  function refreshSub() { var p = passedCount(); sub.textContent = clsLabel() + ' · ' + p + ' of 9 modules'; }
+  function refreshSub() { var p = passedCount(); sub.textContent = clsLabel() + ' · ' + p + ' of 9 modules' + (unlocked() ? '' : ' · preview'); }
   function buildCls() {
     clsRow.innerHTML = '<span>His class</span>';
     CLASSES.forEach(function (c) {
@@ -212,6 +219,24 @@
     }, 1800);
   }
   document.querySelectorAll('[data-open-coach]').forEach(function (el) { el.addEventListener('click', function (e) { e.preventDefault(); openPanel(); }); });
+
+  /* ---------------- access gate (modules 2-9) ---------------- */
+  if (PAGE === 'module' && MOD >= 2 && !unlocked()) {
+    body.classList.add('gated');
+    var first = document.querySelector('main .lesson');
+    var g = document.createElement('div'); g.className = 'gate';
+    g.innerHTML = '<div class="box"><p class="eyebrow">School code</p><h3>This module is for families on InHome</h3>' +
+      '<p>The Parent Playbook is free for every football family at a school on the InHome High School license. Enter the code your head coach or athletic director gave you. Module 1 is open to everyone.</p>' +
+      '<form id="gate-form"><input id="gate-in" type="text" placeholder="School code" autocomplete="off" autocapitalize="characters"><button class="btn" type="submit">Open the Playbook</button></form>' +
+      '<p class="err" id="gate-err">That code is not on the list. Check it with your coach or AD, or <a href="/schools">ask us to bring InHome to your school</a>.</p>' +
+      '<p class="fine" style="margin:16px 0 0">No code yet? <a href="/playbook/1">Start with Module 1</a>, it is open.</p></div>';
+    if (first) first.parentNode.insertBefore(g, first);
+    g.querySelector('#gate-form').addEventListener('submit', function (e) {
+      e.preventDefault(); var v = g.querySelector('#gate-in').value.trim().toUpperCase();
+      if (CODES.indexOf(v) >= 0) { state.code = v; save(); body.classList.remove('gated'); g.remove(); openPanel(true); say('Code accepted. Welcome in. Pick his class below if you have not, and I will grade the quizzes for his year.', 'coach'); }
+      else { g.querySelector('#gate-err').style.display = 'block'; }
+    });
+  }
 
   /* ---------------- playbook index: progress ---------------- */
   if (PAGE === 'playbook') {
