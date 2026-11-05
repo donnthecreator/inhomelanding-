@@ -179,6 +179,133 @@
     return 'Parents get recruited too. Want to see where your son actually stands? Start with the Playbook.';
   }
 
+  /* ---------------- knowledge base for typed questions ---------------- */
+  /* Keyword matched, not a language model. Every answer is written from the Playbook. */
+  var KB = [
+  { k: ['camp', 'showcase', 'combine', 'which camps', 'good camps', 'elite 11', 'the opening', 'rivals', 'under armour', 'under armor', 'polynesian', 'all american', 'exposure'],
+    a: function () {
+      var qb = state.pos === 'qb';
+      var s = 'Ask one question of any camp before you pay: who is evaluating, by name and by program? That splits every camp into two kinds.\n\n' +
+        'The ones that change recruiting:\n' +
+        '1. A college\'s own camp. If he camps at a school, that staff evaluates him in person, and they are the people who can actually offer him. For most families this is the best money spent all year, and the schools on his target list should be the ones he camps at.\n' +
+        '2. Invite showcases where evaluators and media stand on the sideline. The ones families ask about most are the Rivals Camp Series, Under Armour\'s camps, and Nike\'s The Opening regionals.\n';
+      if (qb) {
+        s += '3. For a quarterback specifically, Elite 11 regionals are the event that moves a QB, and the finals move him a lot. The Opening matters for him too.\n';
+      } else {
+        s += '3. Position-specific events where a real position coach works the group, rather than a field of 300 kids rotating through stations.\n';
+      }
+      s += '4. All-star and bowl combines, like the Polynesian Bowl combine in Las Vegas, which carry real evaluation weight for the players invited.\n\n' +
+        'The ones that mostly do not: big-field developmental camps with no decision-makers, anything that sells a "national" ranking on the day, and most 7-on-7 for linemen, since there are no linemen in 7-on-7.\n\n' +
+        'Two things worth hearing. The price of one developmental camp is close to a month of real training he keeps forever. And before any camp, the offseason sport does more: track for skill positions, wrestling for the trenches. Module 8 is the whole lesson, and it is the one I would read first.';
+      return s;
+    } },
+
+  { k: ['when can', 'call him', 'contact him', 'june 15', 'coaches call', 'reach out to him', 'talk to coaches', 'allowed to call', 'text him'],
+    a: 'For Division I football, coaches may begin calling, texting and emailing him on June 15 after his sophomore year. Face-to-face contact off campus opens January 1 of his junior year.\n\nBefore those dates he is not being ignored, the rules simply do not allow it. He can message coaches himself at any point and they are allowed to write back. Module 5 has the full calendar, and the Start page shows the dates for his exact class.' },
+
+  { k: ['dead period', 'quiet period', 'contact period', 'evaluation period', 'periods'],
+    a: 'Four kinds of windows. A contact period allows in-person contact on and off campus. An evaluation period lets a coach watch him play or practice but not talk recruiting with him. A quiet period allows contact only on the college campus. A dead period allows no in-person contact anywhere.\n\nCalls, texts and film evaluation continue through all of them, including dead periods. A quiet calendar is not a quiet process. Module 5, Lesson 1.' },
+
+  { k: ['official visit', 'unofficial visit', 'visit', 'gameday visit', 'game day'],
+    a: 'An official visit is paid for by the program and the number he can take is limited. An unofficial visit is one you pay for and he can take as many as you can afford. Juniors can begin taking officials in the spring of junior year.\n\nOn either one, he is being evaluated the whole time, and so is your family. Walk a step behind him, let him answer the questions, and watch how the staff treats the people who are not recruits. Write your notes in the car, not in the building. Module 7 has the full lesson, and there is a video with it.' },
+
+  { k: ['highlight', 'film', 'tape', 'hudl', 'how long should', 'video', 'clips'],
+    a: 'Shorter than you think, and the order matters more than the length. A staff decides whether to keep watching inside the first few clips, so the opening clips have to answer the one thing his position gets judged on, not show the longest run.\n\nSpotlight him on every clip. No music, no montage intro, no clips against a 1-9 team. Make sure his profile carries his name, class, position, verified measurables and school, because staffs search by class and position.\n\nIf a school asks for full game film, that is a good sign, not a bad one. Module 4 is the rebuild.' },
+
+  { k: ['email', 'dm', 'message coaches', 'reach out', 'who should contact', 'should i email', 'write to coaches'],
+    a: 'He sends it, under his own name, not you. A message from a parent tells a staff something they did not want to know.\n\nKeep it short with the film link at the top. And know that most coach emails posted online go nowhere; the connection that works runs through his head coach or his trainer to someone on that staff. Ask his coach who he actually knows.\n\nYour job is the conditions: the tape is right, the grades are right, the profile is public, the phone gets answered. The Start page has his first message as a template, and templates for a visit post and an offer post.' },
+
+  { k: ['core course', 'core classes', '16 core', 'eligibility center', 'ncaa clearinghouse', 'clearinghouse', 'academically eligible', 'qualifier'],
+    a: 'Division I requires 16 approved core courses: 4 English, 3 math at Algebra I or higher, 2 science, 1 more of those, 2 social science, and 4 more from those or a foreign language. Ten of the sixteen have to be finished before senior year starts, and seven of those ten in English, math and science.\n\nApproved means approved for his specific high school, so the counselor and the NCAA Eligibility Center are the authorities, not me. Register with the Eligibility Center early and then finish the job by sending transcripts and scores; an incomplete file looks the same as an ineligible one at the moment it matters. Module 6, and it has the scripted counselor questions.' },
+
+  { k: ['gpa', 'grades', 'transcript', 'act', 'sat', 'test score'],
+    a: 'The number that counts is his core-course GPA, computed only from the approved courses, and it is usually lower than the GPA on his report card. Division I asks for 2.3 and Division II for 2.2.\n\nJunior year is the last comfortable fix, because ten of the sixteen core courses lock in before senior year. After graduation exactly one more core course can be used. Pull the transcript and check it against the approved list with his counselor this month, not next spring. Module 6.' },
+
+  { k: ['agent', 'representation', 'advisor', 'marketing rep', 'commission', 'percentage'],
+    a: 'If he has no deals yet, he does not need one. An agent earns a percentage of money he makes, so anyone pushing representation on a junior with nothing on the table is selling something else.\n\nWhen there is real money, the fee structure tells you who you are dealing with. Practitioners generally report 10 to 15 percent on a brand deal that came to him, 15 to 20 on one the rep went and sourced, and very little, often 0 to 3, on collective or revenue-share money, because that follows his roster spot rather than anything the rep sold. Above 20 percent on anything, one blended rate across every kind of money, any fee before a deal closes, or any claim on his future professional earnings, and you walk.\n\nCheck whether he is registered as an athlete agent in your state, and have a lawyer in your state read anything before your son signs. InHome is not an agent and this is not legal advice. Module 9.' },
+
+  { k: ['nil', 'name image likeness', 'brand deal', 'endorsement', 'nil go', 'collective'],
+    a: 'For a high school athlete, whether he can do NIL at all is set by your state high school athletic association, and it differs by state. Check with the association and his school before he signs anything.\n\nOnce he is a Division I athlete, third-party deals of $600 or more are reported through NIL Go, generally within five business days. Keep the paperwork from the first dollar. Module 9, Lesson 6.' },
+
+  { k: ['revenue share', 'rev share', 'getting paid', 'pay him', 'how much money', 'cap'],
+    a: 'Revenue share is the school paying him directly under the House settlement, and it is a different thing from a scholarship and from a roster spot. A program can offer any one of the three without the others, so when a coach says offer, ask which one he means.\n\nThe cap is school-wide, not per athlete, and it is split across every sport at that school: about $20.5 million in the first year and roughly $21.5 million for 2026-27. Football takes the largest share at most schools, but what any one player gets is a negotiation and the overwhelming majority of college football players receive none of it.\n\nIf there is a document, Module 9 walks through an example term sheet clause by clause: the renewal, the injury clause, and the clawback if he transfers. A lawyer in your state reads it before he signs.' },
+
+  { k: ['scholarship', 'full ride', 'partial', 'pay for school', 'tuition', 'financial aid', 'equivalency', 'how many scholarships'],
+    a: 'Two systems, and the difference matters more than the number. In a headcount system every scholarship is a full ride. In an equivalency system the program gets a total and cuts it into pieces across a much bigger roster, so a limit of 36 does not mean 36 players.\n\nSettlement schools no longer have sport-specific scholarship limits and cap the roster at 105. FCS traditionally splits 63. Division II splits 36. NAIA splits 24. Division III, the Ivy League and the Pioneer League give no athletic money at all and meet cost with academic and need-based aid, which is often larger than a partial elsewhere. Junior college rules vary by NJCAA division.\n\nWhen a coach says a percentage, ask percent of what, covering what, for how long, and compare what your family actually pays after everything is applied. Module 1, Lesson 4 has the full table.' },
+
+  { k: ['walk on', 'walk-on', 'preferred walk', 'pwo'],
+    a: 'The 105 cap changed this. The old model carried a large walk-on group on top of the scholarship players; a hard roster limit takes most of those spots off the board, so a walk-on spot is now a real roster spot somebody else is not getting.\n\nIf a preferred walk-on offer comes, the questions are the same as any other: where does he sit on the 105, what does it take to earn aid, and what happens to the spot if the room changes. Get the answer in writing. Module 9, Lesson 5.' },
+
+  { k: ['transfer portal', 'portal', 'transfer'],
+    a: 'When a position need opens, most staffs look at the portal first, because a transfer is a known quantity who can play now. That is the competition a high school player is actually up against, and it is why being evaluated early matters more than it used to.\n\nIt also means a spot that looked open in April can be filled in June. Programs that want him now are worth answering now. Module 1, Lesson 5.' },
+
+  { k: ['juco', 'junior college', 'njcaa', 'prep school'],
+    a: 'Junior college is two years of film, development and a second recruitment, and it has produced a long list of players who ended up at the highest level. It is a real path, not a fallback.\n\nThe aid rules vary by NJCAA division: Division I programs can cover tuition, fees, books, room and board, Division II is limited to tuition, fees and books, Division III gives no athletic aid, and California community colleges give none. Module 1 has the table.' },
+
+  { k: ['d2', 'd3', 'naia', 'division ii', 'division iii', 'fcs', 'small school', 'lower level', 'which level'],
+    a: 'Far more roster spots exist outside FBS than inside it, and none of those levels is a consolation prize. FCS is Division I with full scholarships and players drafted every year. Division II splits real athletic money and stacks it with academic aid. Division III gives no athletic money but often large academic packages. NAIA has its own scholarships, and some NAIA programs would beat FCS teams.\n\nThe mistake that costs families is not aiming at the wrong level, it is aiming at only one. Module 3 builds the target list: a few stretch schools, several that fit him today, and a few where he is already wanted.' },
+
+  { k: ['track', 'wrestling', 'another sport', 'offseason', 'second sport', 'basketball'],
+    a: 'Track for skill positions, wrestling for the trenches. A season of track changes a receiver or back\'s game speed in a way no camp does, and wrestling builds the bend, leverage and hand use an offensive or defensive lineman is graded on.\n\nBoth do more for a profile than most of what families pay for, and both give him a verified number or a result that travels. Module 8, Lesson 4.' },
+
+  { k: ['verified', 'measurable', '40 time', 'forty', 'vertical', 'testing', 'laser', 'height', 'weight', 'hand size'],
+    a: 'Verified means somebody other than your family measured it, at a real event, with a date and a source. A laser 40, a contact pad, a sanctioned meet, a camp that publishes results. A hand time on a phone is not a number and listing one costs credibility.\n\nStaffs also read the ten-yard split as closely as the full 40, because that is the burst football actually asks for. And a verified number below the band for his level is on the record, so if he is not ready, train first and test second. Module 3 has the bands, Module 8 has the lesson, and both have videos.' },
+
+  { k: ['recruiting service', 'service', 'worth the money', 'scam', 'pay someone'],
+    a: 'Three questions before any money changes hands. Who watches his film, by name? What can they do that he cannot do himself? Do they promise offers?\n\nAnyone promising offers is disqualified by the promise. Nobody can promise an offer, because only a program can make one. Module 8, Lesson 5.' },
+
+  { k: ['stars', 'ranking', 'rated', 'rivals ranking', '247', 'three star', 'four star', 'unranked'],
+    a: 'Rankings follow offers, not the other way round. A staff evaluates and offers, another one does, the sites notice the offers and rank him, and then more staffs notice the ranking.\n\nSo the way to get him ranked is to get him evaluated by people who make decisions. Paying to chase the ranking directly is paying for the scoreboard instead of the game. An unranked player with the right film is a normal thing, not a problem to solve. Module 2, Lesson 5.' },
+
+  { k: ['offer', 'committable', 'what does an offer mean', 'got an offer'],
+    a: 'The word carries less than it used to. It can mean a committable scholarship, or a roster spot with no money, or an invitation to keep talking. It can also mean revenue share, which is a third thing again.\n\nSo the follow-ups matter more than the word: Is it committable today? Is it a scholarship, and for how much? Is revenue share part of it, guaranteed or discretionary? What happens if he is injured or the head coach leaves? Written offers to a senior can be issued starting August 1 before senior year; before that it is a verbal. Module 9.' },
+
+  { k: ['signing day', 'sign', 'national letter', 'letter of intent', 'signing window', 'december', 'february'],
+    a: 'There is an early signing window in December and a regular period that opens in February. What he signs now is an athletics aid agreement rather than the old National Letter of Intent.\n\nBefore he signs anything, have the terms, the aid and what happens if the staff changes in writing. Coaching changes are the normal case, not the exception. Module 9 has the pre-commitment question list, and the dates for his class are on the Start page.' },
+
+  { k: ['social media', 'twitter', 'instagram', 'post', 'tweet', 'followers'],
+    a: 'Staffs read the whole timeline, and it gets read before a visit, not after. One post can end a recruitment, and background is a real part of the grade.\n\nUsed well it works for him: coaches follow recruits who visit a rival, so a visit post tells other staffs who is in on him, and the following he builds is what a brand looks at later. Tag the school, thank the coach by name, say what is next, keep it short. The Start page has the templates for a visit, a camp invite and an offer. Module 7, Lesson 4, and there is a video with it.' },
+
+  { k: ['silence', 'not hearing', 'no contact', 'stopped talking', 'ghosted', 'no offers', 'nobody is recruiting', 'heard from', 'havent heard', "haven't heard", 'nobody has', 'no one has', 'no interest', 'ignoring', 'not interested'],
+    a: 'Usually it means a staff is working a different player at that spot first, or the rules do not allow contact yet, or nobody has seen the film. Most of the reasons have nothing to do with him.\n\nThe response is the same either way: make sure the film is right and findable, make sure the transcript is clean, and widen the list to programs that fit him today rather than camping on the few that have not answered. Module 5, Lesson 4.' },
+
+  { k: ['freshman', 'sophomore', 'eighth grade', '8th grade', 'how early', 'too early', 'start now'],
+    a: 'There is no recruiting to do yet, and anyone telling you otherwise is selling something. What there is: a transcript to protect and a body to develop.\n\nEvery class he takes either counts toward his 16 core courses or it does not, and this is the cheapest time to get that right. Add the offseason sport, track or wrestling, and real training. Read Module 1 so the next four years make sense, then Module 6 so the grades never become the reason.' },
+
+  { k: ['senior', 'late', 'no offers yet', 'running out of time'],
+    a: 'The board outside FBS is still live, and so is junior college. FCS, D2, D3, NAIA and JUCO sign players late, and signing runs into the spring.\n\nThe work right now is narrow: get film in front of programs that fit him today, have his coach make calls to people he actually knows, and answer everyone who shows interest within the hour. Module 3 builds that list and Module 9 covers what the offers mean when they come.' },
+
+  { k: ['position change', 'switch positions', 'what position', 'projects to'],
+    a: 'Staffs recruit the player they project at 21, not the position on his jersey today. A high school quarterback who projects to safety, or a tight end who projects to tackle, is normal and is not a demotion.\n\nIf a staff is recruiting him at a different spot, that is information about what they see in his frame and his movement. Ask them directly what they project him at and why. Module 2 covers how a staff reads the whole player.' },
+
+  { k: ['redshirt', 'playing time', 'play as a freshman'],
+    a: 'Ask it directly on the visit: realistically, what does year one look like for him, and what does the depth chart at his position look like in two years? A staff that answers specifically is telling you something real, and a staff that will not is also telling you something.\n\nWith a 105-player cap every spot is accounted for, so where he sits on that number is a fair question to ask. Module 9, Lesson 5.' },
+
+  { k: ['inhome', 'what is this', 'who are you', 'coach ai', 'are you real', 'the lab'],
+    a: 'I am Coach AI, software rather than a person, and I answer from this course, the current calendar and the eligibility rules. I will tell you when a question belongs to your counselor, the Eligibility Center or a lawyer.\n\nInHome is a scouting and recruiting platform that college staffs use to evaluate players on film. We are not an agent, we do not represent athletes, and we never contact programs for a family. I will also never tell you a program is interested; only a program can say that.' },
+
+  { k: ['injury', 'hurt', 'torn', 'surgery'],
+    a: 'Two things to handle. On film, leave the season he was hurt in context rather than hiding it, and get current film up as soon as he is cleared. On paper, if there is a revenue-share or aid agreement in front of you, the injury clause is the one most families never read: ask whether money continues, whether it covers injuries outside team activity, and who performs the medical review.\n\nFor the recruiting itself, let his coach tell staffs directly what happened and what the timeline is. Staffs recruit through injuries all the time; they do not recruit through silence.' },
+
+  { k: ['thank', 'thanks', 'appreciate it', 'helpful'],
+    a: 'Any time. If you want the single most useful thing to do next, it is the deliverable at the end of whichever module you are in. That is the part that actually changes something.' },
+
+  { k: ['hello', 'hi coach', 'hey coach', 'good morning', 'good evening', 'whats up', "what's up"],
+    a: 'Hey. Ask me anything about his recruiting: camps, film, the calendar, core courses, scholarships, offers, agents. If you tell me his class and position I will answer for his year instead of in general.' }
+  ];
+
+  function kbFind(q) {
+    var t = ' ' + q.toLowerCase().replace(/[^a-z0-9' ]+/g, ' ').replace(/\s+/g, ' ') + ' ';
+    var best = null, bestScore = 0;
+    KB.forEach(function (e) {
+      var sc = 0;
+      e.k.forEach(function (w) { if (t.indexOf(w) >= 0) sc += w.length + (w.indexOf(' ') > 0 ? 6 : 0); });
+      if (sc > bestScore) { bestScore = sc; best = e; }
+    });
+    if (!best || bestScore < 4) return null;
+    return typeof best.a === 'function' ? best.a() : best.a;
+  }
+
   /* ---------------- fab + panel ---------------- */
   var fab = document.createElement('div'); fab.className = 'ch-fab';
   var tease = document.createElement('div'); tease.className = 'ch-tease'; tease.style.display = 'none';
@@ -214,7 +341,9 @@
   panel.querySelector('#ch-form').addEventListener('submit', function (e) {
     e.preventDefault(); var i = panel.querySelector('#ch-in'); var t = i.value.trim(); if (!t) return; i.value = '';
     say(t, 'me');
-    say('Right now I answer from the Playbook, so pick one of the questions below and I will give you the real answer. Once your family is on a school code I take anything about his recruiting, and I remember who he is.', 'coach');
+    var hit = kbFind(t);
+    if (hit) { say(hit, 'coach'); return; }
+    say('I do not have a good answer for that one yet. I can take camps, film, the calendar, visits, core courses and GPA, scholarships at each level, offers, revenue share, NIL, agents, the portal, junior college, social media, and what to do in each grade. Try one of those, or ask his head coach, who can reach us directly.', 'coach');
   });
   function openPanel(skipIntro) {
     panel.classList.add('open'); tease.style.display = 'none'; btn.querySelector('.dot').style.display = 'none';
