@@ -182,6 +182,9 @@
   /* ---------------- knowledge base for typed questions ---------------- */
   /* Keyword matched, not a language model. Every answer is written from the Playbook. */
   var KB = [
+  { k: ['7v7', '7 on 7', '7-on-7', 'seven on seven', '7on7', 'pylon', 'ot7', 'battle tournament', 'passing league', 'club team'],
+    a: "Nobody gets offered off 7-on-7. Staffs know it is no pads, no linemen and no pass rush, so it tells them nothing about the things they actually grade. That is the first thing to hold onto.\n\nWhat it is good for is competitive reps against real talent, if he is playing in the right events. The national circuits, Pylon, OT7 and the Battle tournaments, put him against the best skill players in the country every weekend. Two things come out of that. He gets better. And the top national 7-on-7 coaches have real relationships with college staffs, because so many of their past players went on to play at the next level; a call from one of them about your son carries weight.\n\nTwo cautions. First, for the spring, track and real training move a profile more than 7-on-7 does. A verified time in a sanctioned meet is a number a staff trusts; a 7-on-7 highlight is not. Second, do not confuse club 7-on-7 with the summer 7-on-7 his high school plays. The school version is him working with his own teammates on the playbook and it matters for the fall, which is where the film that gets him recruited comes from.\n\nAnd none of it applies to linemen. There are no linemen in 7-on-7. Wrestling is their spring." },
+
   { k: ['camp', 'showcase', 'combine', 'which camps', 'good camps', 'elite 11', 'the opening', 'rivals', 'under armour', 'under armor', 'polynesian', 'all american', 'exposure'],
     a: function () {
       var qb = state.pos === 'qb';
@@ -195,7 +198,7 @@
         s += '3. Position-specific events where a real position coach works the group, rather than a field of 300 kids rotating through stations.\n';
       }
       s += '4. All-star and bowl combines, like the Polynesian Bowl combine in Las Vegas, which carry real evaluation weight for the players invited.\n\n' +
-        'The ones that mostly do not: big-field developmental camps with no decision-makers, anything that sells a "national" ranking on the day, and most 7-on-7 for linemen, since there are no linemen in 7-on-7.\n\n' +
+        'The ones that mostly do not: big-field developmental camps with no decision-makers, anything that sells a "national" ranking on the day, and 7-on-7 if you expect an offer out of it; ask me about 7-on-7 separately, it has its own answer.\n\n' +
         'Two things worth hearing. The price of one developmental camp is close to a month of real training he keeps forever. And before any camp, the offseason sport does more: track for skill positions, wrestling for the trenches. Module 8 is the whole lesson, and it is the one I would read first.';
       return s;
     } },
@@ -302,7 +305,7 @@
       e.k.forEach(function (w) { if (t.indexOf(w) >= 0) sc += w.length + (w.indexOf(' ') > 0 ? 6 : 0); });
       if (sc > bestScore) { bestScore = sc; best = e; }
     });
-    if (!best || bestScore < 4) return null;
+    if (!best || bestScore < 3) return null;
     return typeof best.a === 'function' ? best.a() : best.a;
   }
 
