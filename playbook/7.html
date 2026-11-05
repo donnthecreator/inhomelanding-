@@ -294,6 +294,23 @@
   .toc li{break-inside:avoid;padding:8px 0;border-top:1px solid var(--line);font-size:15px}
   .toc a{text-decoration:none;color:#C9C9C6}.toc a:hover{color:var(--bone)}
   .toc .n{font-family:var(--mono);font-size:11px;color:var(--signal);margin-right:10px}
+
+  .intro{margin-top:40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.85fr);gap:clamp(24px,4vw,56px);align-items:start}
+  .steps{list-style:none;margin:22px 0 0;padding:0;counter-reset:s}
+  .steps li{counter-increment:s;display:flex;gap:14px;padding:13px 0;border-top:1px solid var(--line);font-size:15.5px;color:#DADAD7}
+  .steps li::before{content:counter(s,decimal-leading-zero);font-family:var(--mono);font-size:11px;font-weight:700;color:var(--signal);padding-top:3px;flex:none}
+  .qstart{background:var(--panel);border:1px solid var(--signal);border-radius:3px;padding:clamp(22px,3vw,30px)}
+  .qstart h3{font-family:var(--display);font-weight:400;font-size:26px;line-height:1.05;text-transform:uppercase;margin:10px 0 6px}
+  .qstart p.sub{color:var(--mute);font-size:15px;margin:0 0 18px}
+  .qstart label{display:block;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);margin:0 0 8px}
+  .qstart .yrs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
+  .qstart .yrs button{font-family:var(--mono);font-size:12px;letter-spacing:.08em;background:none;color:var(--bone);border:1px solid var(--line);padding:10px 12px;border-radius:2px;cursor:pointer}
+  .qstart .yrs button.on{background:var(--signal);border-color:var(--signal);color:#fff}
+  .qstart select{width:100%;background:var(--ink);border:1px solid var(--line);color:var(--bone);padding:12px 13px;border-radius:2px;font:inherit;font-size:15px;margin-bottom:18px}
+  .qstart .go{width:100%;justify-content:center}
+  .qstart .note{font-size:13.5px;color:var(--mute);margin:14px 0 0}
+  .qstart .note a{color:var(--bone)}
+  @media (max-width:900px){.intro{grid-template-columns:1fr}}
   @media (max-width:900px){.mod-grid{grid-template-columns:1fr}.lesson-grid{grid-template-columns:1fr}.toc{columns:1}.vslot.vert{max-width:100%}}
 </style>
 </head>

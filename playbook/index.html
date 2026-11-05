@@ -294,6 +294,23 @@
   .toc li{break-inside:avoid;padding:8px 0;border-top:1px solid var(--line);font-size:15px}
   .toc a{text-decoration:none;color:#C9C9C6}.toc a:hover{color:var(--bone)}
   .toc .n{font-family:var(--mono);font-size:11px;color:var(--signal);margin-right:10px}
+
+  .intro{margin-top:40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.85fr);gap:clamp(24px,4vw,56px);align-items:start}
+  .steps{list-style:none;margin:22px 0 0;padding:0;counter-reset:s}
+  .steps li{counter-increment:s;display:flex;gap:14px;padding:13px 0;border-top:1px solid var(--line);font-size:15.5px;color:#DADAD7}
+  .steps li::before{content:counter(s,decimal-leading-zero);font-family:var(--mono);font-size:11px;font-weight:700;color:var(--signal);padding-top:3px;flex:none}
+  .qstart{background:var(--panel);border:1px solid var(--signal);border-radius:3px;padding:clamp(22px,3vw,30px)}
+  .qstart h3{font-family:var(--display);font-weight:400;font-size:26px;line-height:1.05;text-transform:uppercase;margin:10px 0 6px}
+  .qstart p.sub{color:var(--mute);font-size:15px;margin:0 0 18px}
+  .qstart label{display:block;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);margin:0 0 8px}
+  .qstart .yrs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
+  .qstart .yrs button{font-family:var(--mono);font-size:12px;letter-spacing:.08em;background:none;color:var(--bone);border:1px solid var(--line);padding:10px 12px;border-radius:2px;cursor:pointer}
+  .qstart .yrs button.on{background:var(--signal);border-color:var(--signal);color:#fff}
+  .qstart select{width:100%;background:var(--ink);border:1px solid var(--line);color:var(--bone);padding:12px 13px;border-radius:2px;font:inherit;font-size:15px;margin-bottom:18px}
+  .qstart .go{width:100%;justify-content:center}
+  .qstart .note{font-size:13.5px;color:var(--mute);margin:14px 0 0}
+  .qstart .note a{color:var(--bone)}
+  @media (max-width:900px){.intro{grid-template-columns:1fr}}
   @media (max-width:900px){.mod-grid{grid-template-columns:1fr}.lesson-grid{grid-template-columns:1fr}.toc{columns:1}.vslot.vert{max-width:100%}}
 </style>
 </head>
@@ -315,7 +332,47 @@
     <p class="lede">Every module in this course corrects one thing parents believe about recruiting that costs their son opportunities. Short lessons, a video and the written version of each, a quiz built for his graduating class, and one thing you have to produce before the next module.</p>
     <p class="lede" style="font-size:16px;color:var(--mute);margin-top:14px">Module 1 is open to everyone. The Playbook is free for families at schools on the InHome High School license. Not sure where to start? <a href="/start">The Start page</a> picks the module for his class.</p>
   </div>
-  <section class="closing">
+  <section id="intro-sec">
+    <div class="wrap">
+      <p class="eyebrow">Start here</p>
+      <h2>Before Module 1</h2>
+      <div class="intro">
+        <div>
+          <p class="section-lede">This is not a highlight service and it will not get your son recruited. It is the other side of the table: how a college personnel staff actually reads a player, what the calendar allows and when, and what a family can control. Most of it is work you do at home, for free.</p>
+          <ol class="steps">
+            <li>Tell Coach his graduating class and position. Every module, quiz and date on this site then follows his year, not a generic one.</li>
+            <li>Work the module. A short video and the written lesson under it. Nine modules, about five hours total, built to be finished in a parking lot.</li>
+            <li>Pass the quiz at the bottom. Seventy percent to move on. You get the explanation on every answer, right or wrong.</li>
+            <li>Do the one deliverable before the next module. A level list, a rebuilt tape, a transcript check. The next module assumes it is done.</li>
+          </ol>
+          <p class="fine" style="margin-top:20px;max-width:70ch">Nothing here puts him on a college board. It makes sure that when somebody does look, there is something to see. Module 1 is open to everyone; the rest opens with your school code.</p>
+        </div>
+        <div class="qstart" id="qstart">
+          <p class="eyebrow">Two questions</p>
+          <h3>Who are we working with?</h3>
+          <p class="sub">Coach AI uses these for every answer, every date and every quiz from here on. Nothing leaves your browser at this step.</p>
+          <label for="q-class">His graduating class</label>
+          <div class="yrs" id="q-yrs"></div>
+          <label for="q-pos">His position</label>
+          <select id="q-pos">
+            <option value="">Select</option>
+            <option value="qb">Quarterback</option>
+            <option value="skill">Running back, receiver or tight end</option>
+            <option value="db">Defensive back</option>
+            <option value="lb">Linebacker</option>
+            <option value="ol">Offensive line</option>
+            <option value="dl">Defensive line</option>
+            <option value="k">Kicker, punter or snapper</option>
+            <option value="ath">Athlete, or not decided yet</option>
+          </select>
+          <button class="btn go" type="button" id="q-go">Open his Playbook</button>
+          <p class="note">Want Coach to remember him across devices, and your school to see him? <a href="/parents">Set up his full profile</a>, it takes about five minutes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="closing" id="course-sec">
     <div class="wrap">
       <p class="eyebrow">The course</p>
       <h2>Nine modules, about five hours</h2>
