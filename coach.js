@@ -8,7 +8,7 @@
   var CLASSES = ['2027', '2028', '2029', '2030', '2031'];
   var TOTAL = 9;
   var state = { cls: '', pos: '', done: {}, seen: {}, code: '', page: {} };
-  var CODES = ['PARENTS26', 'KNIGHTS26', 'INHOME-DEMO'];
+  var CODES = ['PARENTS26', 'KNIGHTS26', 'INHOME-DEMO', 'TEAMLAB'];
   var ALPHA = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789', TEMP_DAYS = 30;
   function tempValid(code) {
     code = (code || '').toUpperCase();
@@ -389,8 +389,8 @@
     body.classList.add('gated');
     var first = document.querySelector('main .lesson');
     var g = document.createElement('div'); g.className = 'gate';
-    g.innerHTML = '<div class="box"><p class="eyebrow">School code</p><h3>This module is for families on InHome</h3>' +
-      '<p>The Parent Playbook is free for every football family at a school on the InHome High School license. Enter the code your head coach or athletic director gave you. No code at your school yet? <a href="/parents#setup">Set up his profile</a> and we will give you a temporary one on the spot.</p>' +
+    g.innerHTML = '<div class="box"><p class="eyebrow">Access code</p><h3>This module is for families on InHome</h3>' +
+      '<p>The full Parent Playbook is a $199 course. It is free for every football family at a school on the InHome High School license, and free for anyone we hand an access code. Enter the code your coach, AD, or an InHome trainer gave you. No code yet? <a href="/parents#setup">Set up his profile</a> and we will give you a temporary one on the spot.</p>' +
       '<form id="gate-form"><input id="gate-in" type="text" placeholder="School code" autocomplete="off" autocapitalize="characters"><button class="btn" type="submit">Open the Playbook</button></form>' +
       '<p class="err" id="gate-err">That code is not on the list, or a temporary code has expired. Check it with your coach or AD, or <a href="/parents#setup">get a temporary code here</a>.</p>' +
       '<p class="fine" style="margin:16px 0 0">No code yet? <a href="/playbook/1">Start with Module 1</a>, it is open.</p></div>';
