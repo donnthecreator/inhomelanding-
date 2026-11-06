@@ -392,50 +392,211 @@
     <p class="lede">Nine modules on how college football recruiting actually works, built for the people doing the driving, the paying and the worrying. Short lessons, the written version of each, a quiz built for his graduating class, and one thing to produce before the next module.</p>
     <p class="lede" style="font-size:16px;color:var(--mute);margin-top:14px">Module 1 is open to everyone. The Playbook is free for families at schools on the InHome High School license. Not sure where to start? <a href="/start">The Start page</a> picks the module for his class.</p>
   </div>
+  <section id="preview">
+    <div class="wrap">
+      <p class="eyebrow">From the Playbook</p>
+      <h2>A few, to start</h2>
+      <p class="section-lede">Short lessons families actually finish. These are open to everyone. The full video sits under the written lesson in each module.</p>
+      <div class="watch-grid">
+        <figure class="watch">
+          <video controls playsinline preload="none" poster="/media/visit-etiquette.jpg" src="/media/visit-etiquette.mp4" aria-label="The visit is an interview"></video>
+          <figcaption><span class="eyebrow quiet">Module 7</span><strong>The visit is an interview</strong><span>How a family carries itself in the building.</span></figcaption>
+        </figure>
+        <figure class="watch">
+          <video controls playsinline preload="none" poster="/media/right-camp.jpg" src="/media/right-camp.mp4" aria-label="The right camp"></video>
+          <figcaption><span class="eyebrow quiet">Module 8</span><strong>The right camp, not the most camps</strong><span>Spend where evaluators actually are.</span></figcaption>
+        </figure>
+        <figure class="watch">
+          <video controls playsinline preload="none" poster="/media/m3-l2.jpg" src="/media/m3-l2.mp4" aria-label="The laser-timed 40"></video>
+          <figcaption><span class="eyebrow quiet">Module 3</span><strong>The number a staff trusts</strong><span>Laser-timed, with the source on it.</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
   <section id="intro-sec">
     <div class="wrap">
       <p class="eyebrow">Start here</p>
       <h2>Before Module 1</h2>
-      <div class="intro">
+      <div class="intake-grid">
         <div>
           <p class="section-lede">This is not a highlight service and it will not get your son recruited. It is the other side of the table: how a college personnel staff actually reads a player, what the calendar allows and when, and what a family can control. Most of it is work you do at home, for free.</p>
           <ol class="steps">
-            <li>Tell Coach his graduating class and position. Every module, quiz and date on this site then follows his year, not a generic one.</li>
+            <li>Set up his profile. His class and position tune every module, quiz and date to his year, and it tells us who his coach and trainer are so we can help spread his film the right way.</li>
             <li>Work the module one lesson at a time. A short video and the written lesson under it. Most lessons take a few minutes, and the site picks up wherever you stopped.</li>
             <li>Pass the quiz at the bottom. Seventy percent to move on. You get the explanation on every answer, right or wrong.</li>
             <li>Do the one deliverable before the next module. A level list, a rebuilt tape, a transcript check. The next module assumes it is done.</li>
           </ol>
-          <p class="fine" style="margin-top:20px;max-width:70ch">Nothing here puts him on a college board. It makes sure that when somebody does look, there is something to see. Module 1 is open to everyone; the rest opens with your school code.</p>
+          <p class="fine" style="margin-top:20px;max-width:70ch">Nothing here puts him on a college board. It makes sure that when somebody does look, there is something to see. Module 1 is open to everyone; the rest opens with your school code, or a free temporary one from the form.</p>
         </div>
-        <div class="qstart" id="qstart">
-          <p class="eyebrow">Two questions</p>
-          <h3>Who are we working with?</h3>
-          <p class="sub">Coach AI uses these for every answer, every date and every quiz from here on. Nothing leaves your browser at this step.</p>
-          <label for="q-class">His graduating class</label>
-          <div class="yrs" id="q-yrs"></div>
-          <label for="q-pos">His position</label>
-          <select id="q-pos">
-            <option value="">Select</option>
-            <option value="qb">Quarterback</option>
-            <option value="rb">Running back</option>
-            <option value="wr">Wide receiver</option>
-            <option value="te">Tight end</option>
-            <option value="ot">Offensive tackle</option>
-            <option value="og">Guard</option>
-            <option value="c">Center</option>
-            <option value="de">Defensive end</option>
-            <option value="edge">Edge rusher</option>
-            <option value="dt">Defensive tackle</option>
-            <option value="lb">Linebacker</option>
-            <option value="cb">Cornerback</option>
-            <option value="s">Safety</option>
-            <option value="k">Kicker</option>
-            <option value="p">Punter</option>
-            <option value="ls">Long snapper</option>
-            <option value="ath">Athlete</option>
-          </select>
-          <button class="btn go" type="button" id="q-go">Open his Playbook</button>
-          <p class="note">Want Coach to remember him across devices, and your school to see him? <a href="/parents">Set up his full profile</a>, it takes about five minutes.</p>
+                <div class="form-panel" id="p-panel">
+          <div class="form-body">
+            <p class="eyebrow" style="margin-bottom:18px">His profile</p>
+            <form id="p-parent-form" name="parent-onboarding" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+              <input type="hidden" name="form-name" value="parent-onboarding">
+              <p class="hp"><label>Skip this field <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+
+              <div class="fields">
+                <div class="field full">
+                  <label for="p-code">School code</label>
+                  <input id="p-code" name="school_code" type="text" placeholder="From your coach or AD" autocomplete="off" style="text-transform:uppercase">
+                  <label class="check" style="margin-top:10px"><input type="checkbox" id="p-nocode" name="no_school_code" value="yes"><span>My school does not have a code yet. Give me a temporary one.</span></label>
+                </div>
+                <div class="field full nocode-only" hidden>
+                  <div class="straight" style="margin:4px 0 6px;padding:16px 18px">
+                    <p class="eyebrow">Temporary code</p>
+                    <p style="margin:8px 0 0">We will give you a code on the next screen that opens the Playbook for 30 days. In return we ask for your number and your head coach's, so we can reach the school about putting every family on InHome at no cost to them.</p>
+                  </div>
+                </div>
+                <div class="field full"><p class="eyebrow quiet" style="margin:10px 0 0">About you</p></div>
+                <div class="field">
+                  <label for="p-pname">Your name <span class="req">*</span></label>
+                  <input id="p-pname" name="parent_name" type="text" required autocomplete="name">
+                </div>
+                <div class="field">
+                  <label for="p-rel">Relationship <span class="req">*</span></label>
+                  <select id="p-rel" name="relationship" required>
+                    <option value="">Select</option>
+                    <option>Mother</option><option>Father</option><option>Guardian</option><option>Other family</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="p-pemail">Email <span class="req">*</span></label>
+                  <input id="p-pemail" name="parent_email" type="email" required autocomplete="email">
+                </div>
+                <div class="field">
+                  <label for="p-pphone">Mobile phone <span class="req">*</span></label>
+                  <input id="p-pphone" name="parent_phone" type="tel" required autocomplete="tel">
+                </div>
+
+                <div class="field full"><p class="eyebrow quiet" style="margin:10px 0 0">About him</p></div>
+                <div class="field">
+                  <label for="p-aname">Athlete's name <span class="req">*</span></label>
+                  <input id="p-aname" name="athlete_name" type="text" required>
+                </div>
+                <div class="field">
+                  <label for="p-grad">Class of <span class="req">*</span></label>
+                  <select id="p-grad" name="grad_year" required>
+                    <option value="">Select</option>
+                    <option>2027</option><option>2028</option><option>2029</option><option>2030</option><option>2031</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="p-pos">Position <span class="req">*</span></label>
+                  <input id="p-pos" name="position" type="text" required placeholder="CB, DL, WR">
+                </div>
+                <div class="field">
+                  <label for="p-ht">Height and weight</label>
+                  <input id="p-ht" name="height_weight" type="text" placeholder="6'1&quot; / 185">
+                </div>
+                <div class="field">
+                  <label for="p-school">High school <span class="req">*</span></label>
+                  <input id="p-school" name="school" type="text" required>
+                </div>
+                <div class="field">
+                  <label for="p-city">City and state <span class="req">*</span></label>
+                  <input id="p-city" name="city_state" type="text" required placeholder="Tuscaloosa, AL">
+                </div>
+                <div class="field full">
+                  <label for="p-hudl">Hudl link</label>
+                  <input id="p-hudl" name="hudl" type="url" placeholder="https://www.hudl.com/profile/..." autocomplete="url">
+                </div>
+
+                <div class="field full"><p class="eyebrow quiet" style="margin:10px 0 0">His coach and trainer</p><p class="fine" style="margin:4px 0 0">So we can help spread his film the right way, through the people already in his corner.</p></div>
+                <div class="field">
+                  <label for="p-coach">Head coach's name</label>
+                  <input id="p-coach" name="coach_name" type="text" autocomplete="off">
+                </div>
+                <div class="field">
+                  <label for="p-coachphone">Head coach's phone</label>
+                  <input id="p-coachphone" name="coach_phone" type="tel" autocomplete="off" placeholder="School office number is fine">
+                </div>
+                <div class="field full">
+                  <label for="p-coachemail">Head coach's email</label>
+                  <input id="p-coachemail" name="coach_email" type="email" autocomplete="off">
+                </div>
+                <div class="field">
+                  <label for="p-trainer">His trainer's name</label>
+                  <input id="p-trainer" name="trainer_name" type="text" autocomplete="off" placeholder="If he has one">
+                </div>
+                <div class="field">
+                  <label for="p-trainerphone">His trainer's phone</label>
+                  <input id="p-trainerphone" name="trainer_phone" type="tel" autocomplete="off">
+                </div>
+
+                <div class="field full"><p class="eyebrow quiet" style="margin:10px 0 0">Where he stands</p></div>
+                <div class="field">
+                  <label for="p-gpa">Core-course GPA</label>
+                  <select id="p-gpa" name="core_gpa">
+                    <option value="">Not sure</option>
+                    <option>3.5 or above</option><option>3.0 to 3.4</option><option>2.5 to 2.9</option><option>2.3 to 2.4</option><option>Below 2.3</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="p-ec">NCAA Eligibility Center</label>
+                  <select id="p-ec" name="eligibility_center">
+                    <option value="">Not sure</option>
+                    <option>Registered</option><option>Not registered yet</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="p-interest">College interest so far</label>
+                  <select id="p-interest" name="interest">
+                    <option value="">Select</option>
+                    <option>None yet</option><option>Camp invites only</option><option>Coaches have reached out</option><option>Has an offer</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="p-level">Where you think he fits</label>
+                  <select id="p-level" name="target_level">
+                    <option value="">Honestly not sure</option>
+                    <option>FBS</option><option>FCS</option><option>Division II</option><option>Division III</option><option>NAIA</option><option>JUCO</option>
+                  </select>
+                </div>
+                <div class="field full">
+                  <label for="p-agents">Anyone contacted you about representation or NIL?</label>
+                  <textarea id="p-agents" name="agent_contact" placeholder="Who, what they offered, what they asked for. Coach reads these."></textarea>
+                </div>
+                <div class="field full">
+                  <label for="p-goal">What do you most want answered right now?</label>
+                  <textarea id="p-goal" name="first_question" placeholder="The question you have not wanted to ask the coach."></textarea>
+                </div>
+              </div>
+
+              <div class="consent">
+                <p class="eyebrow quiet" style="margin:0 0 12px">Before you send it</p>
+                <label class="check"><input type="checkbox" id="p-c-guardian" name="consent_guardian" value="yes" required><span>I am the parent or legal guardian of the athlete named above. He is at least 13 years old, and I consent to InHome collecting and using the information on this form about him as described in the <a href="/privacy" target="_blank" rel="noopener">Privacy Notice</a>.</span></label>
+                <label class="check"><input type="checkbox" id="p-c-contact" name="consent_contact" value="yes" required><span>I agree that InHome (Athlete's Inc+) may contact me by phone call, text message and email at the number and address I provided, about my athlete's recruiting, the Parent Playbook and the InHome High School program. Message and data rates may apply. Message frequency varies. Consent to receive texts is not a condition of any purchase. Reply STOP to any text to opt out and HELP for help.</span></label>
+                <label class="check contact-consent" hidden><input type="checkbox" id="p-c-coach" name="consent_coach" value="yes"><span>The coach or trainer contact information I provided is published contact information or I have their permission to share it. I understand InHome will contact them only about his recruiting and the InHome program.</span></label>
+                <label class="check"><input type="checkbox" id="p-c-terms" name="consent_terms" value="yes" required><span>I have read the <a href="/privacy" target="_blank" rel="noopener">Privacy Notice and Terms of Use</a>. I understand that InHome is not an agent, does not represent athletes, and that nothing on this site is legal advice, eligibility advice, or a promise of contact from any college program.</span></label>
+              </div>
+              <input type="hidden" name="issued_code" id="p-issued" value="">
+              <input type="hidden" name="code_path" id="p-path" value="school">
+              <input type="hidden" name="source_page" id="p-source" value="">
+
+              <div class="form-foot">
+                <button class="btn" type="submit" id="p-submit-btn">Set up his profile</button>
+                <p class="fine">Coach opens the right module for his class as soon as you hit send.</p>
+              </div>
+              <p class="status" id="p-status"></p>
+              <p class="fine" style="margin-top:16px">This information runs Coach AI and the Parent Playbook for your family and, if your school is on InHome, is visible to your school. It is never sold, and it is not shared with college programs, agents or trainers unless you ask us to. Full details in the <a href="/privacy">Privacy Notice</a>.</p>
+            </form>
+          </div>
+
+          <div class="done" id="p-done" role="status">
+            <div id="p-done-school">
+              <p class="eyebrow">Received</p>
+              <h3>Coach has him</h3>
+              <p>Check the email you gave us. Your school's InHome access, Module 1 and Coach AI are on the way. If the school code did not match, we will tell you what to do instead.</p>
+            </div>
+            <div id="p-done-ind" hidden>
+              <p class="eyebrow">Your temporary code</p>
+              <div class="bigcode" id="p-bigcode"></div>
+              <h3>The Playbook is open</h3>
+              <p>That code is good for 30 days and it is already working on this device. Write it down for his other parent, or anyone else in the house, and enter it on any module page. We will call you, and we will reach out to <span id="p-coach-echo">his coach</span> about putting every family at the school on InHome at no cost to the school.</p>
+              <div class="cta-row" style="margin-top:18px"><a class="btn" id="p-open" href="/playbook">Open his Playbook</a></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -458,6 +619,7 @@
       <p class="fine" style="margin-top:22px;max-width:78ch">Rules and dates are current for the 2026-27 cycle and get rewritten every August. Nothing in this course is legal advice or an eligibility determination; the NCAA Eligibility Center and your school counselor make those calls. Taking the course is not a scouting submission and does not put a player on any college board.</p>
     </div>
   </section>
+<script src="/parent_form.js" defer></script>
 </main>
 <footer>
   <div class="wrap foot">

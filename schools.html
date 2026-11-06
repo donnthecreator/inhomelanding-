@@ -509,19 +509,6 @@
                     <p style="margin:8px 0 0">We will give you a code on the next screen that opens the Playbook for 30 days. In return we ask for your number and your head coach's, so we can reach the school about putting every family on InHome at no cost to them.</p>
                   </div>
                 </div>
-                <div class="field nocode-only" hidden>
-                  <label for="p-coach">Head coach's name <span class="req">*</span></label>
-                  <input id="p-coach" name="coach_name" type="text" autocomplete="off">
-                </div>
-                <div class="field nocode-only" hidden>
-                  <label for="p-coachphone">Head coach's phone <span class="req">*</span></label>
-                  <input id="p-coachphone" name="coach_phone" type="tel" autocomplete="off" placeholder="School office number is fine">
-                </div>
-                <div class="field full nocode-only" hidden>
-                  <label for="p-coachemail">Head coach's email</label>
-                  <input id="p-coachemail" name="coach_email" type="email" autocomplete="off">
-                </div>
-
                 <div class="field full"><p class="eyebrow quiet" style="margin:10px 0 0">About you</p></div>
                 <div class="field">
                   <label for="p-pname">Your name <span class="req">*</span></label>
@@ -576,6 +563,28 @@
                   <input id="p-hudl" name="hudl" type="url" placeholder="https://www.hudl.com/profile/..." autocomplete="url">
                 </div>
 
+                <div class="field full"><p class="eyebrow quiet" style="margin:10px 0 0">His coach and trainer</p><p class="fine" style="margin:4px 0 0">So we can help spread his film the right way, through the people already in his corner.</p></div>
+                <div class="field">
+                  <label for="p-coach">Head coach's name</label>
+                  <input id="p-coach" name="coach_name" type="text" autocomplete="off">
+                </div>
+                <div class="field">
+                  <label for="p-coachphone">Head coach's phone</label>
+                  <input id="p-coachphone" name="coach_phone" type="tel" autocomplete="off" placeholder="School office number is fine">
+                </div>
+                <div class="field full">
+                  <label for="p-coachemail">Head coach's email</label>
+                  <input id="p-coachemail" name="coach_email" type="email" autocomplete="off">
+                </div>
+                <div class="field">
+                  <label for="p-trainer">His trainer's name</label>
+                  <input id="p-trainer" name="trainer_name" type="text" autocomplete="off" placeholder="If he has one">
+                </div>
+                <div class="field">
+                  <label for="p-trainerphone">His trainer's phone</label>
+                  <input id="p-trainerphone" name="trainer_phone" type="tel" autocomplete="off">
+                </div>
+
                 <div class="field full"><p class="eyebrow quiet" style="margin:10px 0 0">Where he stands</p></div>
                 <div class="field">
                   <label for="p-gpa">Core-course GPA</label>
@@ -619,7 +628,7 @@
                 <p class="eyebrow quiet" style="margin:0 0 12px">Before you send it</p>
                 <label class="check"><input type="checkbox" id="p-c-guardian" name="consent_guardian" value="yes" required><span>I am the parent or legal guardian of the athlete named above. He is at least 13 years old, and I consent to InHome collecting and using the information on this form about him as described in the <a href="/privacy" target="_blank" rel="noopener">Privacy Notice</a>.</span></label>
                 <label class="check"><input type="checkbox" id="p-c-contact" name="consent_contact" value="yes" required><span>I agree that InHome (Athlete's Inc+) may contact me by phone call, text message and email at the number and address I provided, about my athlete's recruiting, the Parent Playbook and the InHome High School program. Message and data rates may apply. Message frequency varies. Consent to receive texts is not a condition of any purchase. Reply STOP to any text to opt out and HELP for help.</span></label>
-                <label class="check nocode-only" hidden><input type="checkbox" id="p-c-coach" name="consent_coach" value="yes"><span>The coach contact information I provided is the school's published contact information or I have the coach's permission to share it. I understand InHome will contact the coach only about the InHome High School program.</span></label>
+                <label class="check contact-consent" hidden><input type="checkbox" id="p-c-coach" name="consent_coach" value="yes"><span>The coach or trainer contact information I provided is published contact information or I have their permission to share it. I understand InHome will contact them only about his recruiting and the InHome program.</span></label>
                 <label class="check"><input type="checkbox" id="p-c-terms" name="consent_terms" value="yes" required><span>I have read the <a href="/privacy" target="_blank" rel="noopener">Privacy Notice and Terms of Use</a>. I understand that InHome is not an agent, does not represent athletes, and that nothing on this site is legal advice, eligibility advice, or a promise of contact from any college program.</span></label>
               </div>
               <input type="hidden" name="issued_code" id="p-issued" value="">
@@ -855,10 +864,11 @@
     });
   });
 
-  /* ---------- parent profile form (shared by /parents and /schools) ---------- */
+    /* ---------- parent profile form (shared by /parents, /schools, /playbook) ---------- */
   (function () {
     var form = document.getElementById('p-parent-form');
     if (!form) return;
+    var PAGE = document.body.getAttribute('data-page') || '';
     var panel = document.getElementById('p-panel');
     var btn = document.getElementById('p-submit-btn');
     var status = document.getElementById('p-status');
@@ -866,20 +876,35 @@
     var codeIn = document.getElementById('p-code');
     var coachName = document.getElementById('p-coach');
     var coachPhone = document.getElementById('p-coachphone');
+    var trainerPhone = document.getElementById('p-trainerphone');
     var coachConsent = document.getElementById('p-c-coach');
+    var consentRow = coachConsent.closest('.check');
+    var posIn = document.getElementById('p-pos');
     var onlyNoCode = form.parentNode.querySelectorAll('.nocode-only');
     document.getElementById('p-source').value = location.pathname;
 
+    function needContactConsent() {
+      return noCode.checked || (coachPhone.value.trim() !== '') || (trainerPhone.value.trim() !== '');
+    }
+    function syncConsent() {
+      var need = needContactConsent();
+      consentRow.hidden = !need;
+      coachConsent.required = need;
+      if (!need) coachConsent.checked = false;
+    }
     function setMode() {
       var ind = noCode.checked;
       for (var i = 0; i < onlyNoCode.length; i++) onlyNoCode[i].hidden = !ind;
-      coachName.required = ind; coachPhone.required = ind; coachConsent.required = ind;
+      coachName.required = ind; coachPhone.required = ind;
       codeIn.disabled = ind; if (ind) codeIn.value = '';
       document.getElementById('p-path').value = ind ? 'independent' : 'school';
       btn.textContent = ind ? 'Get my temporary code' : 'Set up his profile';
+      syncConsent();
     }
     noCode.addEventListener('change', setMode);
     codeIn.addEventListener('input', function () { if (codeIn.value.trim() && noCode.checked) { noCode.checked = false; setMode(); } });
+    coachPhone.addEventListener('input', syncConsent);
+    trainerPhone.addEventListener('input', syncConsent);
     setMode();
 
     var ALPHA = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
@@ -906,25 +931,35 @@
         .then(function (res) {
           if (!res.ok) throw new Error(res.status);
           var grad = document.getElementById('p-grad').value;
+          var pos = (posIn.value || '').trim();
           var cs = document.getElementById('p-city').value;
           var st = (cs.split(',').pop() || '').trim().slice(0, 2).toUpperCase();
-          // remember class, position hint and (if issued) the code, for Coach AI and the gate
+          // remember class, position and (if issued) the code, for Coach AI, the quizzes and the gate
           try {
             var KEY = 'inhome_pb';
             var sv = JSON.parse(localStorage.getItem(KEY) || '{}') || {};
             sv.cls = grad || sv.cls;
+            if (pos) sv.pos = pos.toLowerCase();
             if (ind) { sv.code = issued; sv.codeIssued = Date.now(); }
             else { sv.code = codeIn.value.trim().toUpperCase(); sv.codeIssued = 0; }
             localStorage.setItem(KEY, JSON.stringify(sv));
           } catch (err) {}
+
           if (ind) {
             document.getElementById('p-bigcode').textContent = issued;
             var cn = coachName.value.trim(); if (cn) document.getElementById('p-coach-echo').textContent = 'Coach ' + cn.split(' ').pop();
             document.getElementById('p-done-school').hidden = true;
             document.getElementById('p-done-ind').hidden = false;
-            document.getElementById('p-open').href = '/playbook?class=' + encodeURIComponent(grad);
+            document.getElementById('p-open').href = PAGE === 'playbook' ? '#course-sec' : '/playbook?class=' + encodeURIComponent(grad);
             panel.classList.add('is-done');
             panel.scrollIntoView({ block: 'center' });
+          } else if (PAGE === 'playbook') {
+            // stay on the Playbook: confirm and drop them at the modules
+            var school = document.getElementById('p-done-school');
+            if (school) school.innerHTML = '<p class="eyebrow">He is set</p><h3>Start with Module 1</h3><p>Coach AI now has his class and position, and the quizzes are set for the class of ' + (grad || 'his year') + '. The modules are right below.</p><div class="cta-row" style="margin-top:18px"><a class="btn" href="#course-sec">Go to the modules</a></div>';
+            panel.classList.add('is-done');
+            var csec = document.getElementById('course-sec');
+            if (csec) csec.scrollIntoView({ behavior: 'smooth', block: 'start' });
           } else {
             window.location.href = '/start?class=' + encodeURIComponent(grad) + (st.length === 2 ? '&state=' + st : '');
           }
