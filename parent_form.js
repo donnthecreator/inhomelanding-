@@ -16,6 +16,12 @@
     var posIn = document.getElementById('p-pos');
     var onlyNoCode = form.parentNode.querySelectorAll('.nocode-only');
     document.getElementById('p-source').value = location.pathname;
+    var PAID = PAGE === 'welcome';
+    if (PAID) {
+      // already purchased: the school code is irrelevant here
+      var codeField = codeIn.closest('.field'); if (codeField) codeField.style.display = 'none';
+      document.getElementById('p-path').value = 'purchase';
+    }
 
     function needContactConsent() {
       return noCode.checked || (coachPhone.value.trim() !== '') || (trainerPhone.value.trim() !== '');
@@ -52,12 +58,12 @@
       e.preventDefault();
       status.className = 'status';
       var ind = noCode.checked;
-      if (!ind && !codeIn.value.trim()) {
+      if (!PAID && !ind && !codeIn.value.trim()) {
         status.className = 'status err';
         status.textContent = 'Enter your school code, or tick the box to get a temporary one.';
         codeIn.focus(); return;
       }
-      var issued = ind ? makeCode() : '';
+      var issued = (ind && !PAID) ? makeCode() : '';
       document.getElementById('p-issued').value = issued;
       btn.disabled = true; btn.textContent = 'Sending...';
       var data = new URLSearchParams(new FormData(form)).toString();
@@ -79,7 +85,9 @@
             localStorage.setItem(KEY, JSON.stringify(sv));
           } catch (err) {}
 
-          if (ind) {
+          if (PAID) {
+            window.location.href = '/start?class=' + encodeURIComponent(grad) + (st.length === 2 ? '&state=' + st : '');
+          } else if (ind) {
             document.getElementById('p-bigcode').textContent = issued;
             var cn = coachName.value.trim(); if (cn) document.getElementById('p-coach-echo').textContent = 'Coach ' + cn.split(' ').pop();
             document.getElementById('p-done-school').hidden = true;

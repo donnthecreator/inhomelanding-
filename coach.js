@@ -19,7 +19,7 @@
     var issued = state.codeIssued || 0;
     return issued > 0 && (Date.now() - issued) < TEMP_DAYS * 86400000;
   }
-  function unlocked() { var c = (state.code || '').toUpperCase(); return CODES.indexOf(c) >= 0 || tempValid(c); }
+  function unlocked() { var c = (state.code || '').toUpperCase(); return CODES.indexOf(c) >= 0 || tempValid(c) || !!state.paid; }
   var REC = { '2027': 9, '2028': 3, '2029': 1, '2030': 1, '2031': 1 };
   var POSNAME = { qb: 'quarterback', rb: 'running back', wr: 'wide receiver', te: 'tight end', ot: 'offensive tackle', og: 'guard', c: 'center', de: 'defensive end', edge: 'edge rusher', dt: 'defensive tackle', lb: 'linebacker', cb: 'cornerback', s: 'safety', k: 'kicker', p: 'punter', ls: 'long snapper', ath: 'athlete' };
   var POSTIP = {
@@ -393,7 +393,9 @@
       '<p>The full Parent Playbook is a $199 course. It is free for every football family at a school on the InHome High School license, and free for anyone we hand an access code. Enter the code your coach, AD, or an InHome trainer gave you. No code yet? <a href="/parents#setup">Set up his profile</a> and we will give you a temporary one on the spot.</p>' +
       '<form id="gate-form"><input id="gate-in" type="text" placeholder="School code" autocomplete="off" autocapitalize="characters"><button class="btn" type="submit">Open the Playbook</button></form>' +
       '<p class="err" id="gate-err">That code is not on the list, or a temporary code has expired. Check it with your coach or AD, or <a href="/parents#setup">get a temporary code here</a>.</p>' +
-      '<p class="fine" style="margin:16px 0 0">No code yet? <a href="/playbook/1">Start with Module 1</a>, it is open.</p></div>';
+      '<div class="gate-buy"><p class="eyebrow quiet" style="margin:0 0 10px">No code, no school on InHome?</p>' +
+      '<a class="btn" href="https://buy.stripe.com/9B63cwebPetX6F05qQ5os00">Get the full Playbook, $199</a>' +
+      '<p class="fine" style="margin:12px 0 0">One time, lifetime access. Or <a href="/playbook/1">start with Module 1</a> free.</p></div></div>';
     if (first) first.parentNode.insertBefore(g, first);
     g.querySelector('#gate-form').addEventListener('submit', function (e) {
       e.preventDefault(); var v = g.querySelector('#gate-in').value.trim().toUpperCase();
