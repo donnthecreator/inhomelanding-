@@ -354,6 +354,24 @@
   .qstart .note a{color:var(--bone)}
   @media (max-width:900px){.intro{grid-template-columns:1fr}}
   @media (max-width:900px){.mod-grid{grid-template-columns:1fr}.lesson-grid{grid-template-columns:1fr}.toc{columns:1}.vslot.vert{max-width:100%}}
+
+  .pbfaq{margin-top:4px}
+  .pbfaq .faqsec{margin-bottom:30px;scroll-margin-top:90px}
+  .pbfaq .faqsec h3{font-family:var(--display);font-weight:400;font-size:clamp(20px,2.4vw,26px);line-height:1.1;text-transform:uppercase;letter-spacing:.02em;margin:0 0 4px}
+  details.q{border-top:1px solid var(--line);padding:0}
+  details.q:last-of-type{border-bottom:1px solid var(--line)}
+  details.q summary{list-style:none;cursor:pointer;padding:16px 36px 16px 0;position:relative;font-size:16px;color:var(--bone)}
+  details.q summary::-webkit-details-marker{display:none}
+  details.q summary::after{content:"+";position:absolute;right:4px;top:14px;font-family:var(--mono);font-size:20px;color:var(--signal);line-height:1}
+  details.q[open] summary::after{content:"–"}
+  details.q summary:hover{color:#fff}
+  details.q .a{padding:0 36px 20px 0}
+  details.q .a p{color:#C9C9C6;font-size:15px;margin:0 0 12px;max-width:68ch}
+  details.q .a p:last-child{margin-bottom:0}
+  details.q .a a{color:var(--bone)}
+  .faqcols{columns:2;column-gap:clamp(30px,5vw,64px)}
+  .faqcols .faqsec{break-inside:avoid}
+  @media (max-width:820px){.faqcols{columns:1}}
 </style>
 </head>
 <body data-page="module" data-module="1" data-title="The Honest Math">
