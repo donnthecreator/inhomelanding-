@@ -8,7 +8,9 @@
   var CLASSES = ['2027', '2028', '2029', '2030', '2031'];
   var TOTAL = 9;
   var state = { cls: '', pos: '', done: {}, seen: {}, code: '', page: {} };
-  var CODES = ['PARENTS26', 'KNIGHTS26', 'INHOME-DEMO', 'TEAMLAB'];
+  /* School codes: one per InHome High School program. A coach sends his
+     families /playbook?code=<SCHOOL> and it opens unlocked. */
+  var CODES = ['PARENTS26', 'KNIGHTS26', 'INHOME-DEMO', 'TEAMLAB', 'GATEWAY26'];
   var ALPHA = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789', TEMP_DAYS = 30;
   function tempValid(code) {
     code = (code || '').toUpperCase();
@@ -44,8 +46,13 @@
   function load() {
     try { var s = JSON.parse(localStorage.getItem(KEY) || '{}'); if (s && typeof s === 'object') state = Object.assign(state, s); } catch (e) {}
     try {
-      var p = new URLSearchParams(location.search).get('class');
+      var qs = new URLSearchParams(location.search);
+      var p = qs.get('class');
       if (p && CLASSES.indexOf(p) >= 0 && p !== state.cls) { state.cls = p; save(); }
+      /* A team link from the coach's portal carries the school code, so the
+         family lands in the Playbook already unlocked, no code to type. */
+      var qc = (qs.get('code') || '').trim().toUpperCase();
+      if (qc && CODES.indexOf(qc) >= 0 && qc !== state.code) { state.code = qc; save(); }
     } catch (e) {}
   }
   function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
