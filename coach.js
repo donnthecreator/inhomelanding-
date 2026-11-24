@@ -10,7 +10,7 @@
   var state = { cls: '', pos: '', done: {}, seen: {}, code: '', page: {} };
   /* School codes: one per InHome High School program. A coach sends his
      families /playbook?code=<SCHOOL> and it opens unlocked. */
-  var CODES = ['PARENTS26', 'KNIGHTS26', 'INHOME-DEMO', 'TEAMLAB', 'GATEWAY26'];
+  var CODES = ['PARENTS26', 'KNIGHTS26', 'INHOME-DEMO', 'TEAMLAB', 'GATEWAY26', 'HALE26'];
   var ALPHA = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789', TEMP_DAYS = 30;
   function tempValid(code) {
     code = (code || '').toUpperCase();
